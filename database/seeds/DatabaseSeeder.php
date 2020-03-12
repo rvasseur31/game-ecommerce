@@ -9,8 +9,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        // $this->call(UsersTableSeeder::class);
+    public function run() {
+        $this->call([
+            CustomerReviewSeeder::class,
+            GameActivationKeySeeder::class,
+            GameBuyByUserSeeder::class,
+            GameSeeder::class
+        ]);
     }
 }
