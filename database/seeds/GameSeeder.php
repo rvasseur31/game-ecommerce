@@ -10,7 +10,7 @@ class GameSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(Game::class, 4)->create()->each(function ($game) {
+        factory(Game::class, 12)->create()->each(function ($game) {
             $game->save();
         });
     }

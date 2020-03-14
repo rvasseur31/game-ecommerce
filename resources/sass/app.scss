@@ -1,1 +1,126 @@
-//
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+h2 {
+    color: #000;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    margin: 30px 0 60px;
+
+    &::after {
+        content: "";
+        width: 100px;
+        position: absolute;
+        margin: 0 auto;
+        height: 4px;
+        border-radius: 1px;
+        background: #7ac400;
+        left: 0;
+        right: 0;
+        bottom: -20px;
+    }
+}
+.carousel {
+    margin: 50px auto;
+    padding: 0 70px;
+
+    .item {
+        color: #747d89;
+        min-height: 325px;
+        text-align: center;
+        overflow: hidden;
+
+        h4 {
+            font-size: 18px;
+        }
+        h4,
+        p,
+        ul {
+            margin-bottom: 5px;
+        }
+    }
+
+    .carousel-control {
+        height: 44px;
+        width: 40px;
+        background: #7ac400;
+        margin: auto 0;
+        border-radius: 4px;
+        opacity: 0.8;
+
+        &:hover {
+            background: #78bf00;
+            opacity: 1;
+        }
+
+        i {
+            font-size: 36px;
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            margin: -19px 0 0 0;
+            z-index: 5;
+            left: 0;
+            right: 0;
+            color: #fff;
+            text-shadow: none;
+            font-weight: bold;
+        }
+    }
+}
+
+.carousel .carousel-control.left i {
+    margin-left: -2px;
+}
+.carousel .carousel-control.right i {
+    margin-right: -4px;
+}
+
+// .slick-prev,
+// .slick-next {
+//     background: #1a58aa;
+//     background-size: 100%, 100%;
+//     width: 45px;
+//     height: 90px;
+//     font-size: 0;
+//     border: none;
+//     position: absolute;
+//     top: 50%;
+//     z-index: 5;
+//     transform: translateY(-45px);
+//     outline: none;
+//     cursor: pointer;
+// }
+
+// .slick--prev {
+//     border-bottom-right-radius: 90px;
+//     border-top-right-radius: 90px;
+//     left: 0;
+// }
+
+// .slick--next {
+//     border-bottom-left-radius: 90px;
+//     border-top-left-radius: 90px;
+//     right: 0;
+// }
+
+// .slick--prev-icon {
+//     position: relative;
+//     right: 25%;
+//     transform: translateX(-25%);
+// }
+
+// .slick--next-icon {
+//     position: relative;
+//     left: 25%;
+//     transform: translateX(-25%);
+// }
