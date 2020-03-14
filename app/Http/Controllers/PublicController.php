@@ -11,6 +11,11 @@ class PublicController extends Controller {
     }
 
     public function allGames() {
+        $gamesBeforeModif = Game::all();
+        $games = array();
+        for ($index = 0; $index < count($gamesBeforeModif); $index++) {
+
+        }
         return view('list-game')->with('games', Game::all());
     }
 
