@@ -10882,7 +10882,7 @@ a.text-dark:focus {
   }
 }
 
-.card {
+.items .card {
   margin: auto;
   margin-top: 20px;
   padding-top: 20px;

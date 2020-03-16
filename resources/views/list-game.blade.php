@@ -14,7 +14,7 @@
 
 
 <body>
-    <!-- <div class="header">
+    <div class="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('assets/logo2.png') }}" class="img-logo" alt="fifa">
@@ -54,7 +54,7 @@
                 </form>
             </div>
         </nav>
-    </div> -->
+    </div>
     <div class="items">
         @foreach($games as $game)
         <div class="card">

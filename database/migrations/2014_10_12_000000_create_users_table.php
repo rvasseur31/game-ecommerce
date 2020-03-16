@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration {
             $table->string('password');
             $table->rememberToken();
             $table->float('balance', 8, 2)->default(0.00);
+            $table->integer('xp')->default(0);
             $table->timestamps();
         });
     }

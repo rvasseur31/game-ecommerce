@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
             CustomerReviewSeeder::class,
             GameActivationKeySeeder::class,
             GameBuyByUserSeeder::class,
-            GameSeeder::class
+            GameSeeder::class,
+            PlatformSeeder::class
         ]);
     }
 }

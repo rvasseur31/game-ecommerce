@@ -20,6 +20,8 @@ class CreateGamesTable extends Migration {
             $table->string('original_filename')->nullable();
             $table->integer('stock')->nullable();
             $table->float('price', 8, 2);
+            $table->integer('view')->default(0);
+            $table->integer('platform');
             $table->timestamps();
         });
     }
