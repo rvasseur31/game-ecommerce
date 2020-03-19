@@ -12,9 +12,8 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return Game::all()->paginate(20);
     }
 
     /**

@@ -10912,6 +10912,10 @@ a.text-dark:focus {
   -webkit-box-orient: vertical;
 }
 
+.login-card {
+  padding-bottom: 16px;
+}
+
 /* Arrows */
 
 .slick-prev,

@@ -4,7 +4,7 @@ return [
     "email" => "Adresse E-Mail",
     "failed" => "Ces informations d'identification ne correspondent pas.",
     "firstname" => "Prénom",
-    "lastname" => "Nom",
+    "lastname" => "Nom de famille",
     "login" => "S'identifier",
     "password" => "Mot de passe",
     "register" => "Inscription",

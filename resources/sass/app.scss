@@ -1,16 +1,12 @@
 @charset "UTF-8";
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css");
 @import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
-
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
-
 @import "public-home";
 @import "utils";
 
@@ -48,7 +44,6 @@
     transform: translateY(-45px);
     outline: none;
     cursor: pointer;
-
     &:hover,
     &:focus {
         outline: none;
@@ -58,7 +53,6 @@
             opacity: $slick-opacity-on-hover;
         }
     }
-
     &:before {
         display: block;
         position: absolute;
