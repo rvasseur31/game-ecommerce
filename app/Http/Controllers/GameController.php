@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return Game::all()->paginate(20);
+        return view('game.index')->with('games', Game::all());
     }
 
     /**
@@ -21,9 +21,8 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('game.create');
     }
 
     /**
@@ -32,53 +31,65 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $inputs = $request->except('_token');
+        $game = new Game();
+        foreach ($inputs as $key => $value) {
+            $game->$key = $value;
+        }
+        $game->save();
+
+        return redirect(route('game.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param  integer  $game
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
-    {
+    public function show($game) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param  integer  $game
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $game)
-    {
-        //
+    public function edit($game) {
+        return view('game.edit', ['game' => Game::find($game)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Game  $game
+     * @param  integer  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
-    {
-        //
+    public function update(Request $request, $game) {
+        $inputs = $request->except('_token', '_method');
+        $game = Game::find($game);
+        foreach ($inputs as $key => $value) {
+            $game->$key = $value;
+        }
+        $game->save();
+
+        return redirect(route('game.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Game  $game
+     * @param  integer  $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
-    {
-        //
+    public function destroy($game) {
+        $game = game::find($game);
+        $game->delete();
+
+        return redirect(route('game.index'))->with('success', 'game supprimé avec succès !');
     }
 }
