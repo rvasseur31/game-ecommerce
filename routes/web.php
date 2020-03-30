@@ -19,6 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/accueil', 'PublicController@allGames');
+Route::get('/platform/{id}', 'PublicController@gamePerPlatform')->name('platform');
+Route::get('/product/{id}', 'PublicController@product')->name('product');
+Route::post('/favorite', 'GameLikedByUserController@favorite')->name('favorite');
 
 Auth::routes();
 
