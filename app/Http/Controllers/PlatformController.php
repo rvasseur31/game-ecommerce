@@ -4,20 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Platform;
 use Illuminate\Http\Request;
-use Whoops\Handler\PlainTextHandler;
 
-class PlatformController extends Controller
-{
+class PlatformController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $platforms = Platform::all();
-
-        return view('platforms.index', compact('platforms'));
+    public function index() {
+        return view('platforms.index')->with('platforms', Platform::all());
     }
 
     /**
@@ -25,9 +20,8 @@ class PlatformController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('platforms.create');
+    public function create() {
+        return view('platform.create');
     }
 
     /**
@@ -36,77 +30,65 @@ class PlatformController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nom'=>'required',
-            'prenom'=>'required',
-            'email'=>'required',
-            'telephone'=>'required'
-        ]);
-
-        $platform = new Platform([
-            'platform' => $request->get('platform')
-        ]);
+    public function store(Request $request) {
+        $inputs = $request->except('_token');
+        $platform = new Platform();
+        foreach ($inputs as $key => $value) {
+            $platform->$key = $value;
+        }
         $platform->save();
-        return redirect('/plateforme')->with('success', 'platform bien enregistré !');
+
+        return redirect(route('platform.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Platform  $platform
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function show(Platform $platform)
-    {
+    public function show($platform) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Platform  $platform
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function edit(Platform $platform, $id)
-    {
-        $platform = Platform::find($id);
-        return view('platforms.edit', compact('platform'));     
+    public function edit($platform) {
+        return view('platform.edit', ['platform' => Platform::find($platform)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Platform  $platform
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platform $platform, $id)
-    {
-
-        $platform = Platform::find($id);
-        $platform->platform =  $request->get('platform');
+    public function update(Request $request, $platform) {
+        $inputs = $request->except('_token', '_method');
+        $platform = Platform::find($platform);
+        foreach ($inputs as $key => $value) {
+            $platform->$key = $value;
+        }
         $platform->save();
 
-        return redirect('/plateforme')->with('success', 'platform mis à jour!');
+        return redirect(route('platform.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Platform  $platform
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platform $platform, $id)
-    {
-        $platform = Platform::find($id);
+    public function destroy($platform) {
+        $platform = Platform::find($platform);
         $platform->delete();
 
-        return redirect('/plateforme')->with('success', 'platform bien supprimé');
+        return redirect(route('platform.index'))->with('success', 'platform supprimé avec succès !');
     }
-
-
-
-
 }

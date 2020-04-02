@@ -10922,6 +10922,11 @@ a.text-dark:focus {
   color: #393939;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* Arrows */
 
 .slick-prev,
@@ -10942,7 +10947,7 @@ a.text-dark:focus {
 
 .slick-prev,
 .slick-next {
-  background: #007E33;
+  background: #007e33;
   background-size: 100%, 100%;
   width: 45px;
   height: 90px;
@@ -10961,7 +10966,7 @@ a.text-dark:focus {
 .slick-next:hover,
 .slick-next:focus {
   outline: none;
-  background: #00C851;
+  background: #00c851;
   color: transparent;
 }
 

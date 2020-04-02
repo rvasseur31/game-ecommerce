@@ -29,4 +29,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('avis', 'CustomerReviewController');
 
-Route::resource('plateforme', 'PlatformController');
+Route::resource('platforms', 'PlatformController');
