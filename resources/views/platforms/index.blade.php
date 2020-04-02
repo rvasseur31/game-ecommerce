@@ -3,7 +3,7 @@
 @section('main')
 <div class="row">
 <div class="col-sm-12">
-    <h1 class="display-3">Platform</h1> 
+    <h1 class="display-3">Platformes</h1> 
     <div class="col-sm-12">
         @if(session()->get('success'))
             <div class="alert alert-success">
@@ -25,10 +25,10 @@
             <td>{{$platform->id}}</td>
             <td>{{$platform->platform}}</td>
             <td>
-                <a href="{{ route('platforms.edit', $platform->id)}}" class="btn btn-primary">Editer</a>
+                <a href="{{ route('platforme.edit', $platform->id)}}" class="btn btn-primary">Editer</a>
             </td>
             <td>
-                <form action="{{ route('platforms.destroy', $platform->id)}}" method="post">
+                <form action="{{ route('platforme.destroy', $platform->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Supprimer</button>
@@ -39,7 +39,7 @@
     </tbody>
   </table>
     <div>
-        <a style="margin: 19px;" href="{{ route('platforms.create') }}" class="btn btn-primary">Ajouter une plateforme</a>
+        <a style="margin: 19px;" href="{{ route('platforme.create') }}" class="btn btn-primary">Ajouter une plateforme</a>
     </div> 
 <div>
 </div>
