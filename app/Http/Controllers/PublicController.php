@@ -19,4 +19,8 @@ class PublicController extends Controller {
         return view('list-game')->with('games', Game::all());
     }
 
+    public function showDetails() {
+        return view('game-info');
+    }
+
 }

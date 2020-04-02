@@ -14,7 +14,9 @@ class CustomerReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Customer_review::all();
+
+        return view('avis.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class CustomerReviewController extends Controller
      */
     public function create()
     {
-        //
+        return view('avis.create');
     }
 
     /**
@@ -35,7 +37,21 @@ class CustomerReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username'=>'required',
+            'note'=>'required',
+            'titre'=>'required',
+            'email'=>'required'
+        ]);
+
+        $avis = new Customer_review([
+            'nom' => $request->get('nom'),
+            'note' => $request->get('note'),
+            'titre' => $request->get('titre'),
+            'message' => $request->get('messagee')
+        ]);
+        $avis->save();
+        return redirect('/avis')->with('success', 'Avis bien enregistré !');
     }
 
     /**
@@ -55,9 +71,10 @@ class CustomerReviewController extends Controller
      * @param  \App\Customer_review  $customer_review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer_review $customer_review)
+    public function edit($id)
     {
-        //
+        $avis = Customer_review::find($id);
+        return view('avis.edit', compact('avis'));     
     }
 
     /**
@@ -67,9 +84,23 @@ class CustomerReviewController extends Controller
      * @param  \App\Customer_review  $customer_review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer_review $customer_review)
+    public function update(Request $request, Customer_review $customer_review, $id)
     {
-        //
+        $request->validate([
+            'username'=>'required',
+            'note'=>'required',
+            'titre'=>'required',
+            'message'=>'required'
+        ]);
+
+        $avis = Customer_review::find($id);
+        $avis->username =  $request->get('username');
+        $avis->note = $request->get('note');
+        $avis->titre = $request->get('titre');
+        $avis->message = $request->get('message');
+        $avis->save();
+
+        return redirect('/avis')->with('success', 'Contact mis à jour!');
     }
 
     /**
@@ -78,8 +109,11 @@ class CustomerReviewController extends Controller
      * @param  \App\Customer_review  $customer_review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer_review $customer_review)
+    public function destroy(Customer_review $customer_review, $id)
     {
-        //
+        $avis = Customer_review::find($id);
+        $avis->delete();
+
+        return redirect('/avis')->with('success', 'avis bien supprimé');
     }
 }

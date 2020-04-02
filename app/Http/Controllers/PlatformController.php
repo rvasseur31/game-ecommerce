@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Platform;
 use Illuminate\Http\Request;
+use Whoops\Handler\PlainTextHandler;
 
 class PlatformController extends Controller
 {
@@ -14,7 +15,9 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        //
+        $platforms = Platform::all();
+
+        return view('platforms.index', compact('platforms'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        //
+        return view('platforms.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom'=>'required',
+            'prenom'=>'required',
+            'email'=>'required',
+            'telephone'=>'required'
+        ]);
+
+        $platform = new Platform([
+            'platform' => $request->get('platform')
+        ]);
+        $platform->save();
+        return redirect('/plateforme')->with('success', 'platform bien enregistré !');
     }
 
     /**
@@ -55,9 +69,10 @@ class PlatformController extends Controller
      * @param  \App\Platform  $platform
      * @return \Illuminate\Http\Response
      */
-    public function edit(Platform $platform)
+    public function edit(Platform $platform, $id)
     {
-        //
+        $platform = Platform::find($id);
+        return view('platforms.edit', compact('platform'));     
     }
 
     /**
@@ -67,9 +82,14 @@ class PlatformController extends Controller
      * @param  \App\Platform  $platform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platform $platform)
+    public function update(Request $request, Platform $platform, $id)
     {
-        //
+
+        $platform = Platform::find($id);
+        $platform->platform =  $request->get('platform');
+        $platform->save();
+
+        return redirect('/plateforme')->with('success', 'platform mis à jour!');
     }
 
     /**
@@ -78,8 +98,15 @@ class PlatformController extends Controller
      * @param  \App\Platform  $platform
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platform $platform)
+    public function destroy(Platform $platform, $id)
     {
-        //
+        $platform = Platform::find($id);
+        $platform->delete();
+
+        return redirect('/plateforme')->with('success', 'platform bien supprimé');
     }
+
+
+
+
 }

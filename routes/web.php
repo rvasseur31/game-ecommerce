@@ -23,3 +23,7 @@ Route::get('/accueil', 'PublicController@allGames');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('avis', 'CustomerReviewController');
+
+Route::resource('plateforme', 'PlatformController');
