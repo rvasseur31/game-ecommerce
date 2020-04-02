@@ -22,6 +22,7 @@ class CreateGamesTable extends Migration {
             $table->float('price', 8, 2);
             $table->integer('view')->default(0);
             $table->integer('platform');
+            $table->date('release_date')->default(now());
             $table->timestamps();
         });
     }

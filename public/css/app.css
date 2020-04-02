@@ -10882,7 +10882,8 @@ a.text-dark:focus {
   }
 }
 
-.items .card {
+.items .card,
+.paginate .card {
   margin: auto;
   margin-top: 20px;
   padding-top: 20px;
@@ -10914,6 +10915,11 @@ a.text-dark:focus {
 
 .login-card {
   padding-bottom: 16px;
+}
+
+.product-price {
+  font-size: 32px;
+  color: #393939;
 }
 
 /* Arrows */
