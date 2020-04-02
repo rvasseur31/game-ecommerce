@@ -11,6 +11,10 @@
 @import "utils";
 @import "product";
 
+html,
+body {
+    overflow-x: hidden;
+}
 /* Arrows */
 
 .slick-prev,
@@ -33,7 +37,7 @@
 
 .slick-prev,
 .slick-next {
-    background: #007E33;
+    background: #007e33;
     background-size: 100%, 100%;
     width: 45px;
     height: 90px;
@@ -48,7 +52,7 @@
     &:hover,
     &:focus {
         outline: none;
-        background: #00C851;
+        background: #00c851;
         color: transparent;
         &:before {
             opacity: $slick-opacity-on-hover;

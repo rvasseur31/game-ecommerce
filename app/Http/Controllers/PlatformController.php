@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Platform;
 use Illuminate\Http\Request;
 
-class PlatformController extends Controller
-{
+class PlatformController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +21,7 @@ class PlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('platforms.create');
+        return view('platform.create');
     }
 
     /**
@@ -39,7 +38,7 @@ class PlatformController extends Controller
         }
         $platform->save();
 
-        return redirect(route('platforms.index'))->with('success', ' Plateforme enregistré avec succès !');
+        return redirect(route('platform.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
@@ -55,18 +54,18 @@ class PlatformController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  integer  $game
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
     public function edit($platform) {
-        return view('platforms.edit', ['platform' => Platform::find($platform)]);
+        return view('platform.edit', ['platform' => Platform::find($platform)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  integer  $game
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $platform) {
@@ -77,7 +76,7 @@ class PlatformController extends Controller
         }
         $platform->save();
 
-        return redirect(route('platforms.index'))->with('success', 'Plateforme mis à jour avec succès !');
+        return redirect(route('platform.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
@@ -90,6 +89,6 @@ class PlatformController extends Controller
         $platform = Platform::find($platform);
         $platform->delete();
 
-        return redirect(route('platforms.index'))->with('success', 'plateforme supprimé avec succès !');
+        return redirect(route('platform.index'))->with('success', 'platform supprimé avec succès !');
     }
 }

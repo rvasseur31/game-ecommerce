@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
-use App\Game_liked_by_user;
 use App\Platform;
-use App\Repositories\User\UserRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\User\UserInterface;
 
 class PublicController extends Controller {
@@ -38,7 +34,7 @@ class PublicController extends Controller {
     }
 
     public function product(int $game_id) {
-        return Game::where('title', Game::find($game_id)->title)->get();
+        //return Game::where('title', Game::find($game_id)->title)->get();
         return view('product')
             ->with('liked', $this->userRepository->isFavorite($game_id))
             ->with('platforms', Platform::all())
