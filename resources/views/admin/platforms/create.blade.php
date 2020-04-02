@@ -16,7 +16,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('platforms.store') }}">
+      <form method="post" action="{{ route('admin-platforms.store') }}">
           @csrf
           <div class="form-group">
               <label for="platform">Plateforme :</label>

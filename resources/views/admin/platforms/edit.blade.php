@@ -14,7 +14,7 @@
         </div>
         <br /> 
         @endif
-        <form method="post" action="{{ route('platforms.update', $platform->id) }}">
+        <form method="post" action="{{ route('admin-platforms.update', $platform->id) }}">
             @method('PATCH') 
             @csrf
             <div class="form-group">

@@ -17,7 +17,6 @@ class CreateCustomerReviewsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('game_id');
-            $table->date('post_date');
             $table->integer('rating');
             $table->string('title');
             $table->text('description');

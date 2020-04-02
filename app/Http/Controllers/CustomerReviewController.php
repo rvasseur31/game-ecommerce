@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use App\Customer_review;
 use Illuminate\Http\Request;
 
-class CustomerReviewController extends Controller
-{
+class CustomerReviewController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $reviews = Customer_review::all();
-
-        return view('avis.index');
+    public function index() {
+        return view('admin.customer-review.index')->with('customerReviews', Customer_review::all());
     }
 
     /**
@@ -24,9 +20,8 @@ class CustomerReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('avis.create');
+    public function create() {
+        return view('admin.customer-review.create');
     }
 
     /**
@@ -35,85 +30,65 @@ class CustomerReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'username'=>'required',
-            'note'=>'required',
-            'titre'=>'required',
-            'email'=>'required'
-        ]);
+    public function store(Request $request) {
+        $inputs = $request->except('_token');
+        $customerReview = new Customer_review();
+        foreach ($inputs as $key => $value) {
+            $customerReview->$key = $value;
+        }
+        $customerReview->save();
 
-        $avis = new Customer_review([
-            'nom' => $request->get('nom'),
-            'note' => $request->get('note'),
-            'titre' => $request->get('titre'),
-            'message' => $request->get('messagee')
-        ]);
-        $avis->save();
-        return redirect('/avis')->with('success', 'Avis bien enregistré !');
+        return redirect(route('admin-customer-review.index'))->with('success', 'Avis enregistré avec succès !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Customer_review  $customer_review
+     * @param  integer  $customerReview
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer_review $customer_review)
-    {
+    public function show($customerReview) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Customer_review  $customer_review
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $avis = Customer_review::find($id);
-        return view('avis.edit', compact('avis'));     
+    public function edit($customerReview) {
+        return view('admin.customer-review.edit', ['customerReviews' => Customer_review::find($customerReview)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer_review  $customer_review
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer_review $customer_review, $id)
-    {
-        $request->validate([
-            'username'=>'required',
-            'note'=>'required',
-            'titre'=>'required',
-            'message'=>'required'
-        ]);
+    public function update(Request $request, $customerReview) {
+        $inputs = $request->except('_token', '_method');
+        $customerReview = Customer_review::find($customerReview);
+        foreach ($inputs as $key => $value) {
+            $customerReview->$key = $value;
+        }
+        $customerReview->save();
 
-        $avis = Customer_review::find($id);
-        $avis->username =  $request->get('username');
-        $avis->note = $request->get('note');
-        $avis->titre = $request->get('titre');
-        $avis->message = $request->get('message');
-        $avis->save();
-
-        return redirect('/avis')->with('success', 'Contact mis à jour!');
+        return redirect(route('admin-customer-review.index'))->with('success', 'Avis mis à jour avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Customer_review  $customer_review
+     * @param  integer  $platform
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer_review $customer_review, $id)
-    {
-        $avis = Customer_review::find($id);
-        $avis->delete();
+    public function destroy($customerReview) {
+        $customerReview = Customer_review::find($customerReview);
+        $customerReview->delete();
 
-        return redirect('/avis')->with('success', 'avis bien supprimé');
+        return redirect(route('admin-customer-review.index'))->with('success', 'avis supprimé avec succès !');
     }
 }

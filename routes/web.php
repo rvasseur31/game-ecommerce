@@ -27,6 +27,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('avis', 'CustomerReviewController');
+Route::resource('customer-review', 'CustomerReviewController');
 
-Route::resource('platforms', 'PlatformController');
+Route::resource('admin-platforms', 'PlatformController');
+
+
+
+
+//compte: toto@gmail.com -> totoynov31

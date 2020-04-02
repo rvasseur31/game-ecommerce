@@ -14,27 +14,22 @@
         </div>
         <br /> 
         @endif
-        <form method="post" action="{{ route('aviss.update', $avis->id) }}">
+        <form method="post" action="{{ route('admin-custome-review.update', $customerReviews->id) }}">
             @method('PATCH') 
             @csrf
-            <div class="form-group">
-
-                <label for="nom">Nom :</label>
-                <input type="text" class="form-control" name="nom" value={{ $avis->nom }} />
-            </div>
 
             <div class="form-group">
                 <label for="note">Note sur 5 :</label>
-                <input type="text" class="form-control" name="note" value={{ $avis->note }} />
+                <input type="text" class="form-control" name="note" value={{ $customerReviews->note }} />
             </div>
 
             <div class="form-group">
                 <label for="titre">Titre :</label>
-                <input type="text" class="form-control" name="titre" value={{ $avis->titre }} />
+                <input type="text" class="form-control" name="titre" value={{ $customerReviews->titre }} />
             </div>
             <div class="form-group">
                 <label for="message">Message :</label>
-                <input type="text" class="form-control" name="message" value={{ $avis->message }} />
+                <input type="text" class="form-control" name="message" value={{ $customerReviews->message }} />
             </div>
             <button type="submit" class="btn btn-primary">Mettre l'avis</button>
         </form>
