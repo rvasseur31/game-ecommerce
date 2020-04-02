@@ -21,7 +21,7 @@ class PlatformController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('platform.create');
+        return view('platforms.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PlatformController extends Controller {
         }
         $platform->save();
 
-        return redirect(route('platform.index'))->with('success', 'Jeu enregistré avec succès !');
+        return redirect(route('platforms.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
@@ -58,7 +58,7 @@ class PlatformController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($platform) {
-        return view('platform.edit', ['platform' => Platform::find($platform)]);
+        return view('platforms.edit', ['platform' => Platform::find($platform)]);
     }
 
     /**
@@ -76,7 +76,7 @@ class PlatformController extends Controller {
         }
         $platform->save();
 
-        return redirect(route('platform.index'))->with('success', 'Jeu mis à jour avec succès !');
+        return redirect(route('platforms.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
@@ -89,6 +89,6 @@ class PlatformController extends Controller {
         $platform = Platform::find($platform);
         $platform->delete();
 
-        return redirect(route('platform.index'))->with('success', 'platform supprimé avec succès !');
+        return redirect(route('platforms.index'))->with('success', 'platform supprimé avec succès !');
     }
 }

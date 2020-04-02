@@ -18,10 +18,6 @@
     @endif
       <form method="post" action="{{ route('platforms.store') }}">
           @csrf
-          <div class="form-group">    
-              <label for="id">Id :</label>
-              <input type="text" class="form-control" name="id"/>
-          </div>
           <div class="form-group">
               <label for="platform">Plateforme :</label>
               <input type="text" class="form-control" name="platform"/>
