@@ -25,8 +25,9 @@
     </thead>
     <tbody>
         @foreach($customerReviews as $customerReviews)
+            
         <tr>
-            <td>{{$customerReviews->id}}</td>
+            <td>{{Auth::id()}}</td>
             <td>{{$customerReviews->user_id}}</td>
             <td>{{$customerReviews->game_id}}</td>
             <td>{{$customerReviews->rating}}</td>

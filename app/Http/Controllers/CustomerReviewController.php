@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer_review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerReviewController extends Controller {
     /**
@@ -32,6 +33,7 @@ class CustomerReviewController extends Controller {
      */
     public function store(Request $request) {
         $inputs = $request->except('_token');
+        $user = Auth::id();
         $customerReview = new Customer_review();
         foreach ($inputs as $key => $value) {
             $customerReview->$key = $value;

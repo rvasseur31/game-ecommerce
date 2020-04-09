@@ -14,7 +14,7 @@
         </div>
         <br /> 
         @endif
-        <form method="post" action="{{ route('admin-custome-review.update', $customerReviews->id) }}">
+        <form method="post" action="{{ route('customer-review.update', $customerReviews->id) }}">
             @method('PATCH') 
             @csrf
 
