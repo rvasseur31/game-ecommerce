@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             GameActivationKeySeeder::class,
             GameBuyByUserSeeder::class,
             GameSeeder::class,
-            PlatformSeeder::class
+            PlatformSeeder::class,
+            GamePlatformSeeder::class
         ]);
     }
 }

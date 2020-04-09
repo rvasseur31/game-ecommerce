@@ -16,7 +16,7 @@ class CreateCustomerReviewsTable extends Migration
         Schema::create('customer_reviews', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('game_id');
+            $table->integer('game_platforms_id');
             $table->integer('rating');
             $table->string('title');
             $table->text('description');

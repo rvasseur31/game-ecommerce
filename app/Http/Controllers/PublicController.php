@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\GamePlatform;
 use App\Platform;
 use App\Repositories\User\UserInterface;
 
@@ -18,7 +19,7 @@ class PublicController extends Controller {
     }
 
     public function allGames() {
-        return view('list-game')->with('games', Game::all());
+        return view('list-game')->with('games', GamePlatform::allGames()->get());
     }
 
     /**
@@ -30,17 +31,17 @@ class PublicController extends Controller {
     public function gamePerPlatform(int $platform_id) {
         return view('perPlatform')
             ->with('platforms', Platform::all())
-            ->with('games', Game::where('platform', $platform_id)->paginate(12));
+            ->with('games', GamePlatform::allGames()->where('platform_id', $platform_id)->paginate(12));
     }
 
     public function product(int $game_id) {
-        //return Game::where('title', Game::find($game_id)->title)->get();
         return view('product')
             ->with('liked', $this->userRepository->isFavorite($game_id))
             ->with('platforms', Platform::all())
             ->with('gamePlatforms', Game::find($game_id)->hasPlatforms)
-            ->with('game', Game::find($game_id));
+            ->with('game', GamePlatform::game($game_id));
     }
+    
     public function showDetails() {
         return view('game-info');
     }

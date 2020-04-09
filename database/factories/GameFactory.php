@@ -9,8 +9,5 @@ $factory->define(Game::class, function (Faker $faker) {
     return [
         'title' => $faker->jobTitle,
         'description' => $faker->text,
-        'stock' => $faker->randomDigit,
-        'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 30, $max = 70),
-        'platform' => $faker->numberBetween($min = 1, $max = 4)
     ];
 });

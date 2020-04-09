@@ -48,9 +48,32 @@
 .rounded-nav {
     border-radius: 5px;
 }
+
+.product-detailed-information {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.product-detailed-information #collapse-product-detailed-information.collapse:not(.show) {
+    display: block;
+    height: 3rem;
+    overflow: hidden;
+}
+
+.product-detailed-information #collapse-product-detailed-information.collapsing {
+    height: 3rem;
+}
+
+.product-detailed-information a.collapsed:after {
+    content: '+ Show More';
+}
+
+.product-detailed-information a:not(.collapsed):after {
+    content: '- Show Less';
+}
 </style>
 
-<div class="product-content">
+<div class="product-content pt-5">
     <div class="row">
         <div class="product-images col-sm-6 row d-flex justify-content-center">
             <div class="small-product-image-carousel col-sm-2">
@@ -107,15 +130,38 @@
     </nav>
     <div class="product-detailed-information pt-5">
         <h2>Informations détaillées</h2>
-        <p>
-            {{ $game->description }}
+        <p class="collapse" id="collapse-product-detailed-information" aria-expanded="false">
+            {{ $game->description }} {{ $game->description }} {{ $game->description }} {{ $game->description }}
+            {{ $game->description }} {{ $game->description }}
         </p>
+        <a role="button" class="collapsed" data-toggle="collapse" href="#collapse-product-detailed-information"
+            aria-expanded="false" aria-controls="collapse-product-detailed-information">
+        </a>
+        <ul class="list-group list-group-flush pt-3">
+            <li class="list-group-item">Date de sortie : {{ $game->release_date }}</li>
+            <li class="list-group-item">Plateforme : {{ $game->platform }}</li>
+        </ul>
     </div>
     <div class="product-medias pt-5">
         <h2>Médias</h2>
+        <div class="product-images col-sm-6 row d-flex justify-content-center">
+            <div class="small-product-image-carousel col-sm-2">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+            </div>
+            <div class="big-product-image col-sm-8">
+                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+            </div>
+        </div>
     </div>
     <div class="product-customer-reviews pt-5">
         <h2>Avis</h2>
     </div>
+
 </div>
 @endsection
