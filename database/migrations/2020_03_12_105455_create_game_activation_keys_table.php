@@ -13,7 +13,7 @@ class CreateGameActivationKeysTable extends Migration {
     public function up() {
         Schema::create('game_activation_keys', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('game_platforms_id');
             $table->string('activation_key');
             $table->boolean('used')->default(0);
             $table->timestamps();

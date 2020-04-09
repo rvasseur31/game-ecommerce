@@ -15,7 +15,7 @@ class UserRepository implements UserInterface {
     }
 
     public function isFavorite($product_id) {
-        if (count(Game_liked_by_user::where('user_id', Auth::id())->where('game_id', $product_id)->get())) {
+        if (count(Game_liked_by_user::where('user_id', Auth::id())->where('game_platforms_id', $product_id)->get())) {
             return true;
         }
         return false;
@@ -23,11 +23,11 @@ class UserRepository implements UserInterface {
 
     public function addFavorite($product_id) {
         DB::table('game_liked_by_users')->insert(
-            ['user_id' => Auth::id(), 'game_id' => $product_id]
+            ['user_id' => Auth::id(), 'game_platform_id' => $product_id]
         );
     }
 
     public function removeFavorite($product_id) {
-        Game_liked_by_user::where('user_id', Auth::id())->where('game_id', $product_id)->delete();
+        Game_liked_by_user::where('user_id', Auth::id())->where('game_platform_id', $product_id)->delete();
     }
 }

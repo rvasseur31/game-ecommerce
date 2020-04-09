@@ -16,7 +16,7 @@ class CreateGameLikedByUsersTable extends Migration
         Schema::create('game_liked_by_users', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id");
-            $table->integer("game_id");
+            $table->integer("game_platforms_id");
             $table->timestamps();
         });
     }
