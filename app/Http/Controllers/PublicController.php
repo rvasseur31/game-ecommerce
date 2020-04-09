@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer_review;
 use App\Game;
 use App\GamePlatform;
 use App\Platform;
@@ -35,10 +36,14 @@ class PublicController extends Controller {
     }
 
     public function product(int $game_id) {
+        //return GamePlatform::find($game_id)->hasManyCustomerReview();
+        //return $this->getCustomerReviewByMark($game_id);
         return view('product')
             ->with('liked', $this->userRepository->isFavorite($game_id))
             ->with('platforms', Platform::all())
             ->with('gamePlatforms', Game::find($game_id)->hasPlatforms)
+            ->with('customerReviews', GamePlatform::find($game_id)->hasManyCustomerReview())
+            ->with('customerReviewByMark', $this->getCustomerReviewByMark($game_id))
             ->with('game', GamePlatform::game($game_id));
     }
     
@@ -46,4 +51,12 @@ class PublicController extends Controller {
         return view('game-info');
     }
 
+    function getCustomerReviewByMark($game_id) {
+        $customerReviewByMark = [];
+        for($index = 1; $index <= 5; $index++) {
+            $customerReviewByMark[] = GamePlatform::find($game_id)->hasManyCustomerReview()
+                ->where('rating', $index);
+        }
+        return $customerReviewByMark;
+    }
 }

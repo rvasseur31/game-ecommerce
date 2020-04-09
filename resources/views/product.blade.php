@@ -71,6 +71,10 @@
 .product-detailed-information a:not(.collapsed):after {
     content: '- Show Less';
 }
+
+.list-group-item {
+    background-color: unset;
+}
 </style>
 
 <div class="product-content pt-5">
@@ -159,9 +163,54 @@
             </div>
         </div>
     </div>
-    <div class="product-customer-reviews pt-5">
+    <div class="product-customer-reviews pt-5 pb-5">
         <h2>Avis</h2>
-    </div>
+        <div class="bv-inline-histogram-ratings">
+            @for ($index = sizeof($customerReviewByMark)-1; $index >= 0; $index--)
+            <div class="d-flex justify-content-start">
+                <p>{{ $index+1 }}</p>
+                <div class="star-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class=" d-block w-25 mt-1 pl-3">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                            style="width: {{ sizeof($customerReviewByMark[$index]) / sizeof($customerReviews) * 100 }}%"
+                            aria-valuenow="{{ sizeof($customerReviewByMark[$index]) / sizeof($customerReviews) * 100 }}"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <p class="pl-3 customer-review-counter-by-mark">{{ sizeof($customerReviewByMark[$index]) }}</p>
+            </div>
+            @endfor
+        </div>
+        @foreach($customerReviews as $customerReview)
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="d-flex justify-content-start">
+                    <div class="customer-review-mark d-flex justify-content-start pt-1">
+                        @for ($index = 0; $index < $customerReview->rating; $index++)
+                            <span class="fa fa-star text-primary"></span>
+                            @endfor
+                            @for ($index = 0; $index < 5 - $customerReview->rating; $index++)
+                                <span class="fa fa-star"></span>
+                                @endfor
+                    </div>
+                    <div class="ml-3 customer-review-user-firstname">
+                        {{$customerReview->firstname}}
+                    </div>
+                    <div class="ml-3 customer-review-posted-at">
+                        {{$customerReview->created_at}}
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h4>{{ $customerReview->title }}</h4>
+                <p>{{ $customerReview->description }}</p>
+            </div>
 
+        </div>
+        @endforeach
+    </div>
 </div>
 @endsection
