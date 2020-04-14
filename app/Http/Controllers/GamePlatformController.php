@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GamePlatform;
+use App\Platform;
 use Illuminate\Http\Request;
 
 class GamePlatformController extends Controller
@@ -12,9 +13,10 @@ class GamePlatformController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view('admin.game.index')
+            ->with('platforms', Platform::all())
+            ->with('games', GamePlatform::allGames()->paginate(12));
     }
 
     /**
@@ -22,9 +24,8 @@ class GamePlatformController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('gamePlatform.create');
     }
 
     /**
@@ -33,53 +34,65 @@ class GamePlatformController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $inputs = $request->except('_token');
+        $gamePlatform = new GamePlatform();
+        foreach ($inputs as $key => $value) {
+            $gamePlatform->$key = $value;
+        }
+        $gamePlatform->save();
+
+        return redirect(route('gamePlatform.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\GamePlatform  $gamePlatform
+     * @param  integer  $gamePlatform
      * @return \Illuminate\Http\Response
      */
-    public function show(GamePlatform $gamePlatform)
-    {
+    public function show($gamePlatform) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\GamePlatform  $gamePlatform
+     * @param  integer  $gamePlatform
      * @return \Illuminate\Http\Response
      */
-    public function edit(GamePlatform $gamePlatform)
-    {
-        //
+    public function edit($gamePlatform) {
+        return view('gamePlatform.edit', ['gamePlatform' => GamePlatform::find($gamePlatform)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GamePlatform  $gamePlatform
+     * @param  integer  $gamePlatform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GamePlatform $gamePlatform)
-    {
-        //
+    public function update(Request $request, $gamePlatform) {
+        $inputs = $request->except('_token', '_method');
+        $gamePlatform = GamePlatform::find($gamePlatform);
+        foreach ($inputs as $key => $value) {
+            $gamePlatform->$key = $value;
+        }
+        $gamePlatform->save();
+
+        return redirect(route('gamePlatform.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\GamePlatform  $gamePlatform
+     * @param  integer  $gamePlatform
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GamePlatform $gamePlatform)
-    {
-        //
+    public function destroy($gamePlatform) {
+        $gamePlatform = GamePlatform::find($gamePlatform);
+        $gamePlatform->delete();
+
+        return redirect(route('gamePlatform.index'))->with('success', 'gamePlatform supprimé avec succès !');
     }
 }

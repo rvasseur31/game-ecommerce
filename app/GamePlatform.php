@@ -13,17 +13,27 @@ class GamePlatform extends Model {
         return GamePlatform::join('games', 'games.id', '=', 'game_platforms.game_id')
             ->join('platforms', 'platforms.id', '=', 'game_platforms.platform_id')
             ->where('game_platforms.id', $game_id)
+            ->select('game_platforms.*')
+            ->addSelect('games.title')
+            ->addSelect('games.description')
+            ->addSelect('platforms.platform')
             ->first();
     }
 
     public static function allGames() {
         return GamePlatform::join('games', 'games.id', '=', 'game_platforms.game_id')
-            ->join('platforms', 'platforms.id', '=', 'game_platforms.platform_id');
+            ->join('platforms', 'platforms.id', '=', 'game_platforms.platform_id')
+            ->select('game_platforms.*')
+            ->addSelect('games.title')
+            ->addSelect('games.description')
+            ->addSelect('platforms.platform');
     }
 
     public function hasManyCustomerReview() {
         return $this->hasMany('App\Customer_review', 'game_platforms_id')
             ->join('users', 'users.id', '=', 'customer_reviews.user_id')
+            ->select('customer_reviews.*')
+            ->addSelect('users.firstname')
             ->get();
     }
 

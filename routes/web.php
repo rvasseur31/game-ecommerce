@@ -31,7 +31,9 @@ Route::resource('customer-review', 'CustomerReviewController');
 
 Route::resource('admin-platforms', 'PlatformController');
 
-Route::resource('/profil', "ProfileController");
+Route::resource('/profile', "ProfileController");
+
+Route::resource('/admin-game', "GamePlatformController");
 
 
 
