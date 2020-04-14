@@ -26,4 +26,14 @@ class GamePlatform extends Model {
             ->join('users', 'users.id', '=', 'customer_reviews.user_id')
             ->get();
     }
+
+    public static function getOtherPlatformFromGame($game_id) {
+        $gamePlatform = GamePlatform::find($game_id);
+        return GamePlatform::where("game_platforms.game_id", $gamePlatform->game_id)
+            ->where("game_platforms.id", "!=", $game_id)
+            ->join('platforms', 'platforms.id', '=', 'game_platforms.platform_id')
+            ->select('game_platforms.*')
+            ->addSelect('platforms.platform')
+            ->get();
+    }
 }

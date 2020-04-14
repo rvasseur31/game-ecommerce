@@ -36,12 +36,10 @@ class PublicController extends Controller {
     }
 
     public function product(int $game_id) {
-        //return GamePlatform::find($game_id)->hasManyCustomerReview();
-        //return $this->getCustomerReviewByMark($game_id);
         return view('product')
             ->with('liked', $this->userRepository->isFavorite($game_id))
             ->with('platforms', Platform::all())
-            ->with('gamePlatforms', Game::find($game_id)->hasPlatforms)
+            ->with('otherPlatforms', GamePlatform::getOtherPlatformFromGame($game_id))
             ->with('customerReviews', GamePlatform::find($game_id)->hasManyCustomerReview())
             ->with('customerReviewByMark', $this->getCustomerReviewByMark($game_id))
             ->with('game', GamePlatform::game($game_id));

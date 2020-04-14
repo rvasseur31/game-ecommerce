@@ -96,6 +96,12 @@
         <div class="col-sm-6 product-information">
             <h1 class="product-title">{{ $game->title }}</h1>
             <p class="product-price">{{ $game->price }} €</p>
+            <div class="d-flex flex-wrap pb-3">
+            @foreach($otherPlatforms as $platform)
+                <a href="{{ url('/product/'.$platform->id) }}"
+                    class="btn btn-outline-primary mr-4">{{ $platform->platform }}</a>
+            @endforeach
+            </div>
 
             <a type="button" class="btn btn-primary product-add-to-cart">Ajouter au panier</a>
             <form action="{{ route('favorite') }}" method="post">
@@ -163,6 +169,7 @@
             </div>
         </div>
     </div>
+    @if(sizeof($customerReviews))
     <div class="product-customer-reviews pt-5 pb-5">
         <h2>Avis</h2>
         <div class="bv-inline-histogram-ratings">
@@ -212,5 +219,6 @@
         </div>
         @endforeach
     </div>
+    @endif
 </div>
 @endsection
