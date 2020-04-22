@@ -81,10 +81,14 @@
     <div class="row">
         <div class="product-images col-sm-6 row d-flex justify-content-center">
             <div class="small-product-image-carousel col-sm-2">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
             </div>
             <div class="big-product-image col-sm-8">
                 <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
@@ -97,10 +101,10 @@
             <h1 class="product-title">{{ $game->title }}</h1>
             <p class="product-price">{{ $game->price }} €</p>
             <div class="d-flex flex-wrap pb-3">
-            @foreach($otherPlatforms as $platform)
+                @foreach($otherPlatforms as $platform)
                 <a href="{{ url('/product/'.$platform->id) }}"
                     class="btn btn-outline-primary mr-4">{{ $platform->platform }}</a>
-            @endforeach
+                @endforeach
             </div>
 
             <a type="button" class="btn btn-primary product-add-to-cart">Ajouter au panier</a>
@@ -127,19 +131,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Informations détaillées</a>
+                    <a class="nav-link text-uppercase" href="#detailed-information-title">Informations détaillées</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Médias</a>
+                    <a class="nav-link text-uppercase" href="#media-title">Médias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Avis</a>
+                    <a class="nav-link text-uppercase" href="#customer-review-title">Avis</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="product-detailed-information pt-5">
-        <h2>Informations détaillées</h2>
+        <h2 id="detailed-information-title">Informations détaillées</h2>
         <p class="collapse" id="collapse-product-detailed-information" aria-expanded="false">
             {{ $game->description }} {{ $game->description }} {{ $game->description }} {{ $game->description }}
             {{ $game->description }} {{ $game->description }}
@@ -153,13 +157,17 @@
         </ul>
     </div>
     <div class="product-medias pt-5">
-        <h2>Médias</h2>
+        <h2 id="media-title">Médias</h2>
         <div class="product-images col-sm-6 row d-flex justify-content-center">
             <div class="small-product-image-carousel col-sm-2">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image"
+                    src="{{ asset('storage/thumbs/'.$game->filename) }}">
             </div>
             <div class="big-product-image col-sm-8">
                 <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
@@ -169,9 +177,9 @@
             </div>
         </div>
     </div>
-    @if(sizeof($customerReviews))
     <div class="product-customer-reviews pt-5 pb-5">
-        <h2>Avis</h2>
+        <h2 id="customer-review-title">Avis</h2>
+        @if(sizeof($customerReviews))
         <div class="bv-inline-histogram-ratings">
             @for ($index = sizeof($customerReviewByMark)-1; $index >= 0; $index--)
             <div class="d-flex justify-content-start">
@@ -218,7 +226,26 @@
 
         </div>
         @endforeach
+        @else
+
+        <div class="bv-inline-histogram-ratings">
+            @for ($index = sizeof($customerReviewByMark)-1; $index >= 0; $index--)
+            <div class="d-flex justify-content-start">
+                <p>{{ $index+1 }}</p>
+                <div class="star-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="d-block w-25 mt-1 pl-3">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <p class="pl-3 customer-review-counter-by-mark">{{ sizeof($customerReviewByMark[$index]) }}</p>
+            </div>
+            @endfor
+        </div>
+        @endif
     </div>
-    @endif
 </div>
 @endsection

@@ -34,6 +34,8 @@ Route::resource('admin-platforms', 'PlatformController');
 
 Route::resource('/profile', "ProfileController");
 
+Route::resource('/admin-user', "UserController");
+
 Route::get('/admin-game/create/one', "GamePlatformController@createStepOne");
 Route::post('/admin-game/create/one', "GamePlatformController@postStepOne")->name('admin-game.store-step-one');
 Route::get('/admin-game/create/two', "GamePlatformController@createStepTwo");
