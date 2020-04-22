@@ -5,23 +5,53 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <title>Trackmania</title>
     <style>
-        .user-logo{
+        /* .user-logo{
             width: 200px;
             height: 200px;
             margin-top: 20px;
-        }
+        } */
         h1{
             text-align: center;
             margin-top: 10%;
         }
 
-       
+        .img{
+            width:300px;
+            height: 300px;
+        }
+
+        .card{
+            height: 10%;
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container{
+            padding-top: 50px;
+        }
+
+        .card-title{
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 25px;
+        }
+
+        .ariane{
+            padding-top: 10px;
+            width: 25%;
+        }
+
+        .breadcrumb{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -29,14 +59,10 @@
 <body>
     <div class="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('assets/logo2.png') }}" class="img-logo" alt="fifa">
-            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
-
+            </button> 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -66,50 +92,82 @@
             </div>
         </nav>
     </div>
+
+
+    <!--DEBUT PAGE-->
+
+    <nav class="ariane" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Profil</li>
+        </ol>
+    </nav>
+
     <div class="container">
-        <h1>(PSEUDOS)</h1>
-        <div class="logo-user">
-            <img src="assets/profil.png" alt="logo user" class="rounded mx-auto d-block user-logo">
-        </div>
-        <br>
-        <div class="justify-content-center">
-            <form class="form-inline justify-content-center">
-                <div class="form-group mb-2">
-                  <label for="staticEmail2" class="sr-only">Email</label>
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="pseudo">
+        <div class="card mb-3">
+            <img src="assets/banniere.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><b>{{Auth::user()->firstname}}</b></h5>
+              <p class="card-text">
+                  Informations ℹ️: 
+                  <ul>
+                      <li>Nom: {{Auth::user()->firstname}}</li>
+                      <li>Prenom: {{Auth::user()->lastname}}</li>
+                      <li>Email: {{Auth::user()->email}}</li>
+                  </ul>
+              </p>
+               <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
-                <div class="form-group mx-sm-3 mb-2 ">
-                  <label for="inputPassword2" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="pseudo_user">
+                <div class="modal-body">
+                    <!--Debut body modal-->
+                    <form id="changeInformations">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="firstanme">First name</label>
+                            <input type="text" class="form-control" placeholder="{{Auth::user()->firstname}}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="lastename">Last name</label>
+                            <input type="text" class="form-control" placeholder="{{Auth::user()->lastname}}">
+                        </div>
+                        <br>
+                        <div class="col-md-4 mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" placeholder="{{Auth::user()->email}}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" aria-describedby="inputGroupPrepend3">
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-success mb-2">Changer</button>
-            </form>
-            <form class="form-inline justify-content-center">
-                <div class="form-group mb-2">
-                  <label for="staticEmail2" class="sr-only">Email</label>
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="mail">
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
                 </div>
-                <div class="form-group mx-sm-3 mb-2">
-                  <label for="inputPassword2" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="email_user">
-                </div>
-                <button type="submit" class="btn btn-success mb-2">Changer</button>
-            </form>
-            <form class="form-inline justify-content-center">
-                <div class="form-group mb-2">
-                  <label for="staticEmail2" class="sr-only">Email</label>
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="mot de passe">
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                  <label for="inputPassword2" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="password_user">
-                </div>
-                <button type="submit" class="btn btn-success mb-2">Changer</button>
-            </form>
+            </div>
+            </div>
         </div>
     </div>
-
-
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
