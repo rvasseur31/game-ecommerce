@@ -27,13 +27,14 @@
             <form method="post" action="{{ route('admin-game.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="title">Nom du jeu :</label>
-                    <input type="text" class="form-control" name="title" />
+                    <label for="select-platform" >Selectionner une plateforme : </label>
+                    <select class="form-control" id="select-platform" name="platform_id">
+                        @foreach($platforms as $platform)
+                        <option value="{{ $platform->id }}">{{ $platform->platform }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea type="text" class="form-control" name="description"></textarea>
-                </div>
+
                 <div class="form-group{{ $errors->has('image') ? ' is-invalid' : '' }}">
                     <div class="custom-file">
                         <input type="file" id="image" name="image"
@@ -62,7 +63,7 @@
                     <label for="release_date">Entrer la date de sortie du jeu :</label>
                     <input type="date" step="0.01" class="form-control" name="release_date" />
                 </div>
-                <button type="submit" class="btn btn-primary">Ajouter un jeu</button>
+                <button type="submit" class="btn btn-primary">Ajouter le jeu</button>
             </form>
         </div>
     </div>

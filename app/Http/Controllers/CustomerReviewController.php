@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer_review;
+use App\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,9 @@ class CustomerReviewController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.customer-review.index')->with('customerReviews', Customer_review::all());
+        return view('admin.customer-review.index')
+            ->with('platforms', Platform::all())
+            ->with('customerReviews', Customer_review::all());
     }
 
     /**
@@ -23,6 +26,13 @@ class CustomerReviewController extends Controller {
      */
     public function create() {
         return view('admin.customer-review.create');
+    }
+
+    public function confirmCustomerReview($customerReview) {
+        $currentCustomerReview = Customer_review::find($customerReview);
+        $currentCustomerReview->validated = true;
+        $currentCustomerReview->save();
+        return redirect(route('admin-customer-review.index'))->with('success', 'Avis modifié avec succès !');
     }
 
     /**

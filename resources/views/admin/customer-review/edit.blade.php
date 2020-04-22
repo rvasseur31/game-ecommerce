@@ -14,10 +14,9 @@
         </div>
         <br /> 
         @endif
-        <form method="post" action="{{ route('customer-review.update', $customerReviews->id) }}">
+        <form method="post" action="{{ route('admin-customer-review.update', $customerReviews->id) }}">
             @method('PATCH') 
             @csrf
-
             <div class="form-group">
                 <label for="note">Note sur 5 :</label>
                 <input type="text" class="form-control" name="note" value={{ $customerReviews->note }} />

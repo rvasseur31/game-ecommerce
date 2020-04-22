@@ -81,16 +81,16 @@
     <div class="row">
         <div class="product-images col-sm-6 row d-flex justify-content-center">
             <div class="small-product-image-carousel col-sm-2">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
             </div>
             <div class="big-product-image col-sm-8">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
             </div>
         </div>
         <div class="col-sm-6 product-information">
@@ -156,16 +156,16 @@
         <h2>Médias</h2>
         <div class="product-images col-sm-6 row d-flex justify-content-center">
             <div class="small-product-image-carousel col-sm-2">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="small-product-image" alt="small-product-image" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
+                <img class="small-product-image" alt="small-product-image" src="{{ asset('storage/thumbs/'.$game->filename) }}">
             </div>
             <div class="big-product-image col-sm-8">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
-                <img class="image-principal" alt="image-principal" src="{{ asset('assets/fifa20-big.jpg') }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
+                <img class="image-principal" alt="image-principal" src="{{ asset('storage/images/'.$game->filename) }}">
             </div>
         </div>
     </div>

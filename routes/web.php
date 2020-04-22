@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('welcome'));
 });
 
-Route::get('/accueil', 'PublicController@allGames');
+Route::get('/accueil', 'PublicController@allGames')->name('welcome');
 Route::get('/platform/{id}', 'PublicController@gamePerPlatform')->name('platform');
 Route::get('/product/{id}', 'PublicController@product')->name('product');
 Route::post('/favorite', 'GameLikedByUserController@favorite')->name('favorite');
@@ -27,14 +27,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('customer-review', 'CustomerReviewController');
+Route::resource('/admin-customer-review', 'CustomerReviewController');
+Route::post('/admin-customer-review/{id}', 'CustomerReviewController@confirmCustomerReview')->name('admin-customer-review.confirmCustomerReview');
 
 Route::resource('admin-platforms', 'PlatformController');
 
 Route::resource('/profile', "ProfileController");
 
+Route::get('/admin-game/create/one', "GamePlatformController@createStepOne");
+Route::post('/admin-game/create/one', "GamePlatformController@postStepOne")->name('admin-game.store-step-one');
+Route::get('/admin-game/create/two', "GamePlatformController@createStepTwo");
 Route::resource('/admin-game', "GamePlatformController");
-
 
 
 
