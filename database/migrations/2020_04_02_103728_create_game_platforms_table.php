@@ -18,8 +18,6 @@ class CreateGamePlatformsTable extends Migration
             $table->integer('game_id');
             $table->integer('platform_id');
             $table->string('filename')->nullable();
-            $table->string('mime')->nullable();
-            $table->string('original_filename')->nullable();
             $table->integer('stock')->nullable();
             $table->float('price', 8, 2);
             $table->integer('view')->default(0);

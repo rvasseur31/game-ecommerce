@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\GamePlatform;
 use App\Platform;
+use App\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as InterventionImage;
+
+
 
 class GamePlatformController extends Controller
 {
@@ -25,7 +30,8 @@ class GamePlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('gamePlatform.create');
+        return view('admin.game.create')
+            ->with('platforms', Platform::all());
     }
 
     /**
@@ -36,13 +42,23 @@ class GamePlatformController extends Controller
      */
     public function store(Request $request) {
         $inputs = $request->except('_token');
+        $path = basename($inputs['image']->store('public/images'));
+        $image = InterventionImage::make($request->image)->widen(500)->encode();
+        Storage::put('public/thumbs/' . $path, $image);
+
+        $game = new Game();
+        $game->title = $inputs["title"];
+        $game->description = $inputs["description"];
+        ///$game->save();
+        $inputs = $request->except(['_token', 'title', 'description', 'image']);
         $gamePlatform = new GamePlatform();
         foreach ($inputs as $key => $value) {
             $gamePlatform->$key = $value;
         }
+        $gamePlatform->filename = $path;
         $gamePlatform->save();
 
-        return redirect(route('gamePlatform.index'))->with('success', 'Jeu enregistré avec succès !');
+        return redirect(route('admin-game.index'))->with('success', 'Jeu enregistré avec succès !');
     }
 
     /**
