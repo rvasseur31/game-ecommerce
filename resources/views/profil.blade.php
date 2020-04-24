@@ -22,34 +22,51 @@
             margin-top: 10%;
         }
 
-        .img{
-            width:300px;
-            height: 300px;
-        }
+        .nav{
+    padding-top: 10px;
+}
 
-        .card{
-            height: 10%;
-            width: 30%;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 50px;
-            color: white;
-            background-color: #141733;
-        }
+.img{
+    width:300px;
+    height: 300px;
+}
 
-        .container{
-            padding-top: 50px;
-        }
+.carte{
+    height: 10%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px;
+    color: white;
+    background-color: #141733;
+}
 
-        .card-title{
-            text-align: center;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 25px;
-        }
+.profile{
+    padding-top: 50px;
+}
 
-        .card-img-top{
-            border-radius: 50px 50px 0px 0px;
-        }
+.card-title{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25px;
+}
+
+.card-img-top{
+    border-radius: 50px 50px 0px 0px;
+}
+
+.navs{
+    border: solid 1px #141733;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.nav{
+    text-align: center;
+}
+
+.text-navs{
+    height: 20rem;
+}
     </style>
 </head>
 
@@ -94,72 +111,130 @@
 
     <!--DEBUT PAGE-->
 
-    <div class="container">
-        <div class="card mb-3">
-        <img src="assets/banniere.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title"><b>{{Auth::user()->firstname}}</b></h5>
-            <p class="card-text">
-                Informations : 
-                <ul>
-                    <li>Nom: {{Auth::user()->firstname}}</li>
-                    <li>Prenom: {{Auth::user()->lastname}}</li>
-                    <li>Email: {{Auth::user()->email}}</li>
-                </ul>
-            </p>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
-            </div>
-        </div>
+    <div class="container profile">
 
-  
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <!--Debut body modal-->
-                        <form method="post" action="{{route('admin-user.update', Auth::id()) }}">
-                            @method('PATCH') 
-                            @csrf
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="firstname">First name</label>
-                                    <input type="text" class="form-control" name="firstname" placeholder="{{Auth::user()->firstname}}">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="lastename">Last name</label>
-                                    <input type="text" class="form-control" name="lastname" placeholder="{{Auth::user()->lastname}}">
-                                </div>
-                                <br>
-                                <div class="col-md-4 mb-3">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="{{Auth::user()->email}}">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="password">Password</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend3">
+        <div class="row">
+
+
+            <div class="card carte mb-3">
+                <img src="assets/banniere.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><b>{{Auth::user()->firstname}}</b></h5>
+                    <p class="card-text">
+                        Informations :
+                        <ul>
+                            <li>Nom: {{Auth::user()->firstname}}</li>
+                            <li>Prenom: {{Auth::user()->lastname}}</li>
+                            <li>Email: {{Auth::user()->email}}</li>
+                        </ul>
+                    </p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success btn-circle btn-lg float-right" data-toggle="modal"
+                        data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--Debut body modal-->
+                            <form method="post" action="{{route('admin-user.update', Auth::id()) }}">
+                                @method('PATCH') 
+                                @csrf
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="firstname">First name</label>
+                                        <input type="text" class="form-control" name="firstname" placeholder="{{Auth::user()->firstname}}">
                                     </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="lastename">Last name</label>
+                                        <input type="text" class="form-control" name="lastname" placeholder="{{Auth::user()->lastname}}">
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="email">Email</label>
+                                        <input type="text" class="form-control" name="email" placeholder="{{Auth::user()->email}}">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="password">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend3">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Save changes</button>
                                 </div>
-                                <button type="submit" class="btn btn-success">Save changes</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save changes</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Save changes</button>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="navs">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                                aria-controls="description" aria-selected="false">Compte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="avis-tab" data-toggle="tab" href="#avis" role="tab"
+                                aria-controls="avis" aria-selected="false">Achat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="achat-tab" data-toggle="tab" href="#achat" role="tab"
+                                aria-controls="achat" aria-selected="false">Liste d'envies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="envie-tab" data-toggle="tab" href="#envie" role="tab"
+                                aria-controls="envie" aria-selected="false">Badge</a>
+                        </li>
+                    </ul>
+    
+                    <div class="tab-content text-navs">
+                        <div class="tab-pane" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laudantium, esse numquam optio soluta corrupti iste alias nobis architecto, pariatur nesciunt in voluptatem. Similique saepe sequi quibusdam maxime id molestiae?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore distinctio nihil, similique nobis et provident fuga molestiae! Corrupti dignissimos est magni accusamus, dolore, velit voluptas necessitatibus, tempora magnam atque id.
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam deserunt similique maiores, culpa cupiditate quos quae quaerat saepe aspernatur voluptatum officiis blanditiis exercitationem impedit id quo dicta eligendi perspiciatis accusamus.
+                        </div>
+
+                        <div class="tab-pane" id="avis" role="tabpanel" aria-labelledby="avis-tab">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat excepturi corrupti at deleniti sed exercitationem magnam architecto, suscipit quasi repellat laborum odio! Cumque expedita molestiae in quos earum labore recusandae.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ratione modi delectus molestiae minima officiis consectetur? Eveniet veritatis minima rem vero at, commodi ipsa tempore laboriosam consequuntur labore, porro est?
+                        </div>
+
+                        <div class="tab-pane" id="achat" role="tabpanel" aria-labelledby="achat-tab">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo, corporis. Eveniet ut obcaecati vel consectetur perspiciatis dolorum beatae exercitationem soluta enim aperiam, suscipit at a possimus rerum. Quod, rem reprehenderit!
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci facere mollitia velit laboriosam molestias sequi id iusto cupiditate necessitatibus asperiores hic, dicta consectetur harum ad repudiandae placeat eum corporis nesciunt?
+                        </div>
+
+                        <div class="tab-pane" id="envie" role="tabpanel" aria-labelledby="envie-tab">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, nulla? Tenetur odio tempore, cupiditate consequuntur est laborum magnam minima quas exercitationem, ipsa unde dignissimos necessitatibus, sed et quibusdam fugit id.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="w-100"></div>
     </div>
+    <script>
+        $(function () {
+            $('#myTab li:last-child a').tab('show')
+        })
+    </script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
