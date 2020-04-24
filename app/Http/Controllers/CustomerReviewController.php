@@ -25,8 +25,7 @@ class CustomerReviewController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.customer-review.create')
-            ->with('platforms', Platform::all());
+        return view('admin.customer-review.create');
     }
 
     public function confirmCustomerReview($customerReview) {
@@ -72,7 +71,6 @@ class CustomerReviewController extends Controller {
      */
     public function edit($customerReview) {
         return view('admin.customer-review.edit')
-        ->with('platforms', Platform::all())
         ->with('customerReview', Customer_review::find($customerReview));
     }
 

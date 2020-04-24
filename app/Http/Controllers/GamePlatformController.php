@@ -22,7 +22,6 @@ class GamePlatformController extends Controller
      */
     public function index() {
         return view('admin.game.index')
-            ->with('platforms', Platform::all())
             ->with('games', GamePlatform::allGames()->paginate(12));
     }
 
@@ -32,8 +31,7 @@ class GamePlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.game.create')
-            ->with('platforms', Platform::all());
+        $this->createStepOne();
     }
 
     /**
@@ -43,8 +41,7 @@ class GamePlatformController extends Controller
      */
     public function createStepOne() {
         return view('admin.game.create-step-one')
-            ->with('games', Game::all())
-            ->with('platforms', Platform::all());
+            ->with('games', Game::all());
     }
 
     /**

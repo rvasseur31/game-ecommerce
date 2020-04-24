@@ -16,7 +16,6 @@ class UserController extends Controller
      */
     public function index() {
         return view('admin.user.index')
-            ->with('platforms', Platform::all())
             ->with('users', User::all());
     }
 
@@ -55,7 +54,6 @@ class UserController extends Controller
      */
     public function edit($user) {
         return view('admin.user.edit')
-            ->with('platforms', Platform::all())
             ->with('user', User::find($user));
     }
 

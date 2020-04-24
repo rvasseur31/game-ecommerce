@@ -1,6 +1,6 @@
-@extends('platform')
+@extends('layouts.admin')
 
-@section('main')
+@section('content')
 <div class="row">
  <div class="col-sm-8 offset-sm-2">
      <br>
@@ -16,7 +16,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('admin-platforms.store') }}">
+      <form method="post" action="{{ route('admin-platform.store') }}">
           @csrf
           <div class="form-group">
               <label for="platform">Plateforme :</label>
