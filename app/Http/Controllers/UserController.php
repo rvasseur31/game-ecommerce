@@ -69,12 +69,19 @@ class UserController extends Controller
     public function update(Request $request, $user) {
         $inputs = $request->except('_token', '_method');
         $user = User::find($user);
+
+        $user->firstname =  $request->get('firstname');
+        $user->lastname = $request->get('lastname');
+        $user->email = $request->get('email');
+        $user->password = $request->get('pasword');
+
+
         foreach ($inputs as $key => $value) {
             $user->$key = $value;
         }
         $user->save();
 
-        return redirect(route('admin-user.index'))->with('success', 'Utilisateur mis à jour avec succès !');
+        return redirect(route('profile.index'))->with('success', 'Utilisateur mis à jour avec succès !');
     }
 
     /**

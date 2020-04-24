@@ -32,6 +32,9 @@
             width: 30%;
             margin-left: auto;
             margin-right: auto;
+            border-radius: 50px;
+            color: white;
+            background-color: #141733;
         }
 
         .container{
@@ -44,13 +47,8 @@
             font-size: 25px;
         }
 
-        .ariane{
-            padding-top: 10px;
-            width: 25%;
-        }
-
-        .breadcrumb{
-            text-align: center;
+        .card-img-top{
+            border-radius: 50px 50px 0px 0px;
         }
     </style>
 </head>
@@ -96,73 +94,69 @@
 
     <!--DEBUT PAGE-->
 
-    <nav class="ariane" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Profil</li>
-        </ol>
-    </nav>
-
     <div class="container">
         <div class="card mb-3">
-            <img src="assets/banniere.jpg" class="card-img-top" alt="...">
+        <img src="assets/banniere.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title"><b>{{Auth::user()->firstname}}</b></h5>
-              <p class="card-text">
-                  Informations ℹ️: 
-                  <ul>
-                      <li>Nom: {{Auth::user()->firstname}}</li>
-                      <li>Prenom: {{Auth::user()->lastname}}</li>
-                      <li>Email: {{Auth::user()->email}}</li>
-                  </ul>
-              </p>
-               <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            <h5 class="card-title"><b>{{Auth::user()->firstname}}</b></h5>
+            <p class="card-text">
+                Informations : 
+                <ul>
+                    <li>Nom: {{Auth::user()->firstname}}</li>
+                    <li>Prenom: {{Auth::user()->lastname}}</li>
+                    <li>Email: {{Auth::user()->email}}</li>
+                </ul>
+            </p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
             </div>
-          </div>
+        </div>
 
   
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <!--Debut body modal-->
-                    <form id="changeInformations">
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label for="firstanme">First name</label>
-                            <input type="text" class="form-control" placeholder="{{Auth::user()->firstname}}">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="lastename">Last name</label>
-                            <input type="text" class="form-control" placeholder="{{Auth::user()->lastname}}">
-                        </div>
-                        <br>
-                        <div class="col-md-4 mb-3">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" placeholder="{{Auth::user()->email}}">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="password">Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" aria-describedby="inputGroupPrepend3">
-                            </div>
-                        </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     </div>
-                    </form>
+                    <div class="modal-body">
+                        <!--Debut body modal-->
+                        <form method="post" action="{{route('admin-user.update', Auth::id()) }}">
+                            @method('PATCH') 
+                            @csrf
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="firstname">First name</label>
+                                    <input type="text" class="form-control" name="firstname" placeholder="{{Auth::user()->firstname}}">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="lastename">Last name</label>
+                                    <input type="text" class="form-control" name="lastname" placeholder="{{Auth::user()->lastname}}">
+                                </div>
+                                <br>
+                                <div class="col-md-4 mb-3">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="{{Auth::user()->email}}">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="password">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password" aria-describedby="inputGroupPrepend3">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
-                </div>
-            </div>
             </div>
         </div>
     </div>
