@@ -5,7 +5,6 @@ namespace App\Repositories\User;
 use App\Game_liked_by_user;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserInterface {
     private $user;
@@ -22,12 +21,14 @@ class UserRepository implements UserInterface {
     }
 
     public function addFavorite($product_id) {
-        DB::table('game_liked_by_users')->insert(
-            ['user_id' => Auth::id(), 'game_platform_id' => $product_id]
-        );
+        $gameLiked = new Game_liked_by_user();
+        $gameLiked->user_id = Auth::id();
+        $gameLiked->game_platforms_id = $product_id;
+        $gameLiked->save();
+
     }
 
     public function removeFavorite($product_id) {
-        Game_liked_by_user::where('user_id', Auth::id())->where('game_platform_id', $product_id)->delete();
+        Game_liked_by_user::where('user_id', Auth::id())->where('game_platforms_id', $product_id)->delete();
     }
 }
