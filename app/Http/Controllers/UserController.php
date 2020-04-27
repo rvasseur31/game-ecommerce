@@ -18,9 +18,7 @@ class UserController extends Controller
      */
     public function index() {
         return view('admin.user.index')
-            ->with('users', User::all())
-            ->with('gameBuyByUsers', Game_buy_by_user::all())
-            ->with('gameLikedByUsers', Game_liked_by_user::all());
+            ->with('users', User::all());
     }
 
     /**

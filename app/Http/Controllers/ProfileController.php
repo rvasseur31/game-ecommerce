@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Game_liked_by_user;
+use App\Game_buy_by_user;
 
 class ProfileController extends Controller
 {
@@ -14,7 +15,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profil');
+        return view('profil')
+        ->with('gameBuyByUsers', Game_buy_by_user::all())
+        ->with('gameLikedByUsers', Game_liked_by_user::all());
     }
 
     /**
