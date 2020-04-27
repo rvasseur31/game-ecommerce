@@ -51,6 +51,3 @@ Route::get('/invoice-pdf', function () {
     return $pdf->download('invoice.pdf');
 });
 
-
-
-//compte: toto@gmail.com -> totoynov31

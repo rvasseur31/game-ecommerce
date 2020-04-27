@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Game_buy_by_user;
 use App\Platform;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Game_liked_by_user;
 
 class UserController extends Controller
 {
@@ -16,7 +18,9 @@ class UserController extends Controller
      */
     public function index() {
         return view('admin.user.index')
-            ->with('users', User::all());
+            ->with('users', User::all())
+            ->with('gameBuyByUsers', Game_buy_by_user::all())
+            ->with('gameLikedByUsers', Game_liked_by_user::all());
     }
 
     /**

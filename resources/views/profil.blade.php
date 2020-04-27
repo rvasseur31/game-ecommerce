@@ -209,14 +209,53 @@
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam deserunt similique maiores, culpa cupiditate quos quae quaerat saepe aspernatur voluptatum officiis blanditiis exercitationem impedit id quo dicta eligendi perspiciatis accusamus.
                         </div>
 
+                        <!-------------------------------------JEUX ACHETE----------------------------------->
                         <div class="tab-pane" id="avis" role="tabpanel" aria-labelledby="avis-tab">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat excepturi corrupti at deleniti sed exercitationem magnam architecto, suscipit quasi repellat laborum odio! Cumque expedita molestiae in quos earum labore recusandae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ratione modi delectus molestiae minima officiis consectetur? Eveniet veritatis minima rem vero at, commodi ipsa tempore laboriosam consequuntur labore, porro est?
+                            {{-- <table class="table table-striped table-dark">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">id</th>
+                                    <th scope="col">user_id</th>
+                                    <th scope="col">game_activation_key</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {{-- @foreach($gameBuyByUsers as $gameBuyByUser)
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{$gameBuyByUser->id}}</td>
+                                    <td>{{$gameBuyByUser->user_id}}</td>
+                                    <td>{{$gameBuyByUser->game_activation_key_id}}</td>
+                                  </tr>
+                                @endforeach --}}
+                                </tbody>
+                              </table> --}}
                         </div>
 
+
+                        <!--ICI-->
                         <div class="tab-pane" id="achat" role="tabpanel" aria-labelledby="achat-tab">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo, corporis. Eveniet ut obcaecati vel consectetur perspiciatis dolorum beatae exercitationem soluta enim aperiam, suscipit at a possimus rerum. Quod, rem reprehenderit!
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci facere mollitia velit laboriosam molestias sequi id iusto cupiditate necessitatibus asperiores hic, dicta consectetur harum ad repudiandae placeat eum corporis nesciunt?
+                            <table class="table table-striped table-dark">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">id</th>
+                                    <th scope="col">user_id</th>
+                                    <th scope="col">game_platforms_id</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($gameLikedByUsers as $gameLikedByUser)
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{$gameLikedByUser->id}}</td>
+                                    <td>{{$gameLikedByUser->user_id}}</td>
+                                    <td>{{$gameLikedByUser->game_platforms_id}}</td>
+                                  </tr>
+                                @endforeach
+                                </tbody>
+                              </table>
                         </div>
 
                         <div class="tab-pane" id="envie" role="tabpanel" aria-labelledby="envie-tab">
@@ -226,8 +265,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="w-100"></div>
     </div>
     <script>
