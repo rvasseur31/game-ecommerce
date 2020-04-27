@@ -107,7 +107,11 @@
                 @endforeach
             </div>
 
-            <a type="button" class="btn btn-primary product-add-to-cart">Ajouter au panier</a>
+            <form action="{{ route('addToCart', ['id' => $game->id]) }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-primary product-add-to-cart">Ajouter au panier</button>
+            </form>
+            
             <form action="{{ route('favorite') }}" method="post">
                 @csrf
                 <input type="hidden" name="product" value="{{ $game->id }}">

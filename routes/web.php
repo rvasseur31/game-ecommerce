@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect(route('welcome'));
-});
-
-Route::get('/accueil', 'PublicController@allGames')->name('welcome');
+Route::get('/', 'PublicController@index')->name('index');
 Route::get('/platform/{id}', 'PublicController@gamePerPlatform')->name('platform');
 Route::get('/product/{id}', 'PublicController@product')->name('product');
 Route::post('/favorite', 'GameLikedByUserController@favorite')->name('favorite');
@@ -40,6 +36,8 @@ Route::get('/admin-game/create/one', "GamePlatformController@createStepOne");
 Route::post('/admin-game/create/one', "GamePlatformController@postStepOne")->name('admin-game.store-step-one');
 Route::get('/admin-game/create/two', "GamePlatformController@createStepTwo");
 Route::resource('/admin-game', "GamePlatformController");
+
+Route::post('/add-to-cart/{id}', 'PublicController@addToCart')->name('addToCart');
 
 Route::get('/invoice', function () {
     $pdf = PDF::loadView('pdf.invoice');

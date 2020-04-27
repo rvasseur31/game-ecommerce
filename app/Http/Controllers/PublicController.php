@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer_review;
-use App\Game;
 use App\GamePlatform;
 use App\Platform;
+use App\Cart;
 use App\Repositories\User\UserInterface;
+use Illuminate\Http\Request;
+
 
 class PublicController extends Controller {
     protected $userRepository;
@@ -19,8 +20,10 @@ class PublicController extends Controller {
         return 0;
     }
 
-    public function allGames() {
-        return view('list-game')->with('games', GamePlatform::allGames()->get());
+    public function index() {
+        return view('index')
+            ->with('platforms', Platform::all())
+            ->with('games', GamePlatform::allGames()->get());
     }
 
     /**
@@ -44,9 +47,17 @@ class PublicController extends Controller {
             ->with('customerReviewByMark', $this->getCustomerReviewByMark($game_id))
             ->with('game', GamePlatform::game($game_id));
     }
-    
-    public function showDetails() {
-        return view('game-info');
+
+    public function addToCart($game_id) {
+        $game = GamePlatform::find($game_id);
+        $oldCart = session('cart', null);
+        $cart = new Cart($oldCart);
+        $cart->add($game, $game_id);
+
+        session(['cart' => $cart]);
+        
+        dd(session('cart', null));
+        return redirect(route('index'));
     }
 
     function getCustomerReviewByMark($game_id) {
