@@ -49,14 +49,14 @@ class PublicController extends Controller {
     }
 
     public function addToCart($game_id) {
-        $game = GamePlatform::find($game_id);
+        $game = GamePlatform::game($game_id);
         $oldCart = session('cart', null);
         $cart = new Cart($oldCart);
         $cart->add($game, $game_id);
 
         session(['cart' => $cart]);
         
-        dd(session('cart', null));
+        //dd(session('cart', null));
         return redirect(route('index'));
     }
 

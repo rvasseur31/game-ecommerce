@@ -70,24 +70,23 @@
                         </div>
                     </div>
                     <a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span
-                            class="badge badge-danger">{{ session('cart')->totalQuantity }}</span></a>
+                            class="badge badge-danger">{{ session('cart')->totalQuantity ?? 0 }}</span></a>
                     <div class="shopping-cart">
                         <div class="shopping-cart-header">
-                            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge badge-danger">{{ session('cart')->totalQuantity }}</span>
+                            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge badge-danger">{{ session('cart')->totalQuantity ?? 0}}</span>
                             <div class="shopping-cart-total">
                                 <span class="lighter-text">Total:</span>
-                                <span class="main-color-text total">{{ session('cart')->totalPrice }} €</span>
+                                <span class="main-color-text total">{{ session('cart')->totalPrice ?? 0}} €</span>
                             </div>
                         </div>
 
                         <ul class="shopping-cart-items">
-                            @foreach(session('cart')->items as $item)
-                            
+                            @foreach(session('cart')->items ?? [] as $item) 
                             <li class="clearfix">
                                 <img src="{{ asset('storage/images/'.$item['item']->filename) }}"
                                     alt="item1" />
-                                <span class="item-name">{{ $item['item']->game_id}}</span>
-                                <span class="item-detail">Rien</span>
+                                <span class="item-name">{{ $item['item']->title}}</span>
+                                <span class="item-detail">{{ $item['item']->platform}}</span>
                                 <span class="item-price">{{ $item['price']}} €</span>
                                 <span class="item-quantity">Quantité: {{ $item['quantity']}}
                                 </span>
