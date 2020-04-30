@@ -148,18 +148,18 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="firstname">First name</label>
                                         <input type="text" class="form-control" name="firstname"
-                                            placeholder="{{Auth::user()->firstname}}">
+                                            value="{{Auth::user()->firstname}}">
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="lastename">Last name</label>
                                         <input type="text" class="form-control" name="lastname"
-                                            placeholder="{{Auth::user()->lastname}}">
+                                            value="{{Auth::user()->lastname}}">
                                     </div>
                                     <br>
                                     <div class="col-md-4 mb-3">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" name="email"
-                                            placeholder="{{Auth::user()->email}}">
+                                            value="{{Auth::user()->email}}">
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="password">Password</label>

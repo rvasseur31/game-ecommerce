@@ -31,7 +31,7 @@ class GamePlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $this->createStepOne();
+        return $this->createStepOne();
     }
 
     /**

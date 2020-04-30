@@ -60,6 +60,11 @@ class PublicController extends Controller {
         return redirect(route('index'));
     }
 
+    public function shoppingBag() {
+        return view('shopping-bag')
+            ->with('platforms', Platform::all());
+    }
+
     function getCustomerReviewByMark($game_id) {
         $customerReviewByMark = [];
         for($index = 1; $index <= 5; $index++) {

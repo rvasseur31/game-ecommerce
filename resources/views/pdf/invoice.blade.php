@@ -46,8 +46,8 @@
             <div class="col-xs-6">
                 <h4>Vers :</h4>
                 <address>
-                    <strong>Andre Madarang</strong><br>
-                    <span>andre@andre.com</span> <br>
+                    <strong>{{ $user->firstname }} {{ $user->lastname }}</strong><br>
+                    <span>{{ $user->email }}</span> <br>
                     <span>123 Address St.</span>
                 </address>
             </div>

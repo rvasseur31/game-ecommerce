@@ -208,7 +208,7 @@
 
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-primary"><a href="#menu-toggle" id="menu-toggle"
+    <nav class="navbar fixed-top navbar-expand navbar-dark bg-primary"><a href="#menu-toggle" id="menu-toggle"
             class="navbar-brand"><span class="navbar-toggler-icon"></span></a><button class="navbar-toggler"
             type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02"
             aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span></button>

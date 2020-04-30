@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Game_buy_by_user;
-use App\Platform;
 use App\User;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Game_liked_by_user;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -70,15 +67,10 @@ class UserController extends Controller
         $inputs = $request->except('_token', '_method');
         $user = User::find($user);
 
-        $user->firstname =  $request->get('firstname');
-        $user->lastname = $request->get('lastname');
-        $user->email = $request->get('email');
-        $user->password = $request->get('pasword');
-
-
         foreach ($inputs as $key => $value) {
             $user->$key = $value;
         }
+        $user->password = Hash::make($request->get('password'));
         $user->save();
 
         return redirect(route('profile.index'))->with('success', 'Utilisateur mis à jour avec succès !');
