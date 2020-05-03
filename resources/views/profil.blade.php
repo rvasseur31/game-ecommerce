@@ -62,6 +62,10 @@
     .text-navs {
         height: 20rem;
     }
+
+    .info, .table{
+        padding: 20px;
+    }
     </style>
 </head>
 
@@ -186,15 +190,15 @@
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                                aria-controls="description" aria-selected="false">Compte</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="avis-tab" data-toggle="tab" href="#avis" role="tab"
-                                aria-controls="avis" aria-selected="false">Achat</a>
+                                aria-controls="description" aria-selected="false">Description</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="achat-tab" data-toggle="tab" href="#achat" role="tab"
-                                aria-controls="achat" aria-selected="false">Liste d'envies</a>
+                                aria-controls="achat" aria-selected="false">Achat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab"
+                                aria-controls="like" aria-selected="false">Jeux aimé</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="envie-tab" data-toggle="tab" href="#envie" role="tab"
@@ -204,20 +208,18 @@
 
                     <div class="tab-content text-navs">
                         <div class="tab-pane" id="description" role="tabpanel" aria-labelledby="description-tab">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laudantium, esse numquam
-                            optio soluta corrupti iste alias nobis architecto, pariatur nesciunt in voluptatem.
-                            Similique saepe sequi quibusdam maxime id molestiae?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore distinctio nihil, similique
-                            nobis et provident fuga molestiae! Corrupti dignissimos est magni accusamus, dolore, velit
-                            voluptas necessitatibus, tempora magnam atque id.
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam deserunt similique
-                            maiores, culpa cupiditate quos quae quaerat saepe aspernatur voluptatum officiis blanditiis
-                            exercitationem impedit id quo dicta eligendi perspiciatis accusamus.
+                            <ul class="list-group info">
+                                <li class="list-group-item bg-success text-white">A propos</li>
+                                <li class="list-group-item">Prenom: {{Auth::user()->firstname}}</li>
+                                <li class="list-group-item">Nom: {{Auth::user()->lastname}}</li>
+                                <li class="list-group-item">Email: {{Auth::user()->email}}</li>
+                                <li class="list-group-item">Création du compte: {{Auth::user()->created_at}}</li>
+                              </ul>
                         </div>
 
                         <!-------------------------------------JEUX ACHETE----------------------------------->
-                        <div class="tab-pane" id="avis" role="tabpanel" aria-labelledby="avis-tab">
-                            <table class="table table-striped table-dark">
+                        <div class="tab-pane" id="achat" role="tabpanel" aria-labelledby="achat-tab">
+                            <table class="table tab-achat table-striped table-dark">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -227,15 +229,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-  
+                                    @foreach($gameBuyByUsers as $gameBuyByUser)
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{$gameBuyByUser->id}}</td>
+                                        <td>{{$gameBuyByUser->user_id}}</td>
+                                        <td>{{$gameBuyByUser->game_platforms_id}}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
 
 
                         <!--ICI-->
-                        <div class="tab-pane" id="achat" role="tabpanel" aria-labelledby="achat-tab">
-                            <table class="table table-striped table-dark">
+                        <div class="tab-pane" id="like" role="tabpanel" aria-labelledby="like-tab">
+                            <table class="table tab-like table-striped table-dark">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

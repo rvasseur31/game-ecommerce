@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Game_activation_key;
 use Illuminate\Http\Request;
 use App\Game_liked_by_user;
 use App\Game_buy_by_user;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -17,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('profil')
         ->with('gameBuyByUsers', Game_buy_by_user::all())
+        ->with('gameActivationKeys', Game_activation_key::all())//->where('id', $user->id)
         ->with('gameLikedByUsers', Game_liked_by_user::all());
     }
 

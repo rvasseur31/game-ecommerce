@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Platform;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
+
+    public function game(){
+        return $this->hasOne('App\Game_activation_key');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
