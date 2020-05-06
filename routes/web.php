@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\User;
+use App\Mail\mailme;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +40,6 @@ Route::resource('/admin-game', "GamePlatformController");
 
 Route::post('/add-to-cart/{id}', 'PublicController@addToCart')->name('addToCart');
 Route::get('/shopping-bag', 'PublicController@shoppingBag');
+Route::resource('/order', 'OrderController');
 
-Route::get('/invoice', function () {
-    $user = User::find(1);
-    $pdf = PDF::loadView('pdf.invoice', compact('user'));
-    return $pdf->download('invoice.pdf');
-});
-
+Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');

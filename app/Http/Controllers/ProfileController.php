@@ -6,7 +6,10 @@ use App\Game_activation_key;
 use Illuminate\Http\Request;
 use App\Game_liked_by_user;
 use App\Game_buy_by_user;
+use App\Order;
+use App\Platform;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -18,9 +21,10 @@ class ProfileController extends Controller
     public function index()
     {
         return view('profil')
-        ->with('gameBuyByUsers', Game_buy_by_user::all())
-        ->with('gameActivationKeys', Game_activation_key::all())//->where('id', $user->id)
-        ->with('gameLikedByUsers', Game_liked_by_user::all());
+            ->with('platforms', Platform::all())
+            ->with('orders', Order::where('user_id', Auth::id())->get())
+            ->with('gamesBought', Game_buy_by_user::getListGamesBougth(Auth::id()))
+            ->with('gamesLiked', Game_liked_by_user::getListGamesLiked(Auth::id()));
     }
 
     /**

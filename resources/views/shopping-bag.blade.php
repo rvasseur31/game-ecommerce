@@ -47,27 +47,13 @@
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">
                 Adresse de facturation</h4>
-            <form class="needs-validation" novalidate="">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="firstName">Prénom</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                        <div class="invalid-feedback">
-                            Un prénom valide est requis.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lastName">Nom de famille</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                        <div class="invalid-feedback">
-                            Un nom de famille valide est requis.
-                        </div>
-                    </div>
-                </div>
-
+            <form class="needs-validation" novalidate="" method="POST" action="{{ route('order.store') }}">
+                @csrf
+                <input type="hidden" value="{{ Auth::id() }}" name="user_id">
                 <div class="mb-3">
                     <label for="address">Adresse :</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required=""
+                        name="address">
                     <div class="invalid-feedback">
                         Une adresse valide est requise.
                     </div>
@@ -75,13 +61,14 @@
 
                 <div class="mb-3">
                     <label for="address2">Complément d'adresse :<span class="text-muted">(Optionel)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"
+                        name="sub_address">
                 </div>
 
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Pays</label>
-                        <select class="custom-select d-block w-100" id="country" required="">
+                        <select class="custom-select d-block w-100" id="country" name="country" required="">
                             <option value="">Choisir...</option>
                             <option>France</option>
                         </select>
@@ -91,7 +78,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="state">Région</label>
-                        <select class="custom-select d-block w-100" id="state" required="">
+                        <select class="custom-select d-block w-100" id="state" name="state" required="">
                             <option value="">Choisir...</option>
                             <option>Occitanie</option>
                         </select>
@@ -101,7 +88,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="zip">Code postal</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="">
+                        <input type="text" class="form-control" id="zip" name="zip" placeholder="" required="">
                         <div class="invalid-feedback">
                             Un code postal valide est requis
                         </div>

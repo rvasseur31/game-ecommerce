@@ -9,6 +9,6 @@ $factory->define(Game_activation_key::class, function (Faker $faker) {
     return [
         'game_platforms_id' => 1,
         'activation_key' => $faker->uuid,
-        'used' => $faker->boolean
+        'used' => false
     ];
 });

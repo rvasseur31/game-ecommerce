@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\GamePlatform;
 use App\Platform;
 use App\Cart;
+use App\Game_activation_key;
+use App\Game_buy_by_user;
+use App\Order;
 use App\Repositories\User\UserInterface;
-use Illuminate\Http\Request;
+use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class PublicController extends Controller {
@@ -64,6 +68,23 @@ class PublicController extends Controller {
         return view('shopping-bag')
             ->with('platforms', Platform::all());
     }
+
+    public function userInvoice($user_id, $order_id) {
+        $order = Order::find($order_id);
+        $user = User::find($user_id);
+        $games = Game_buy_by_user::where('order_id', $order_id)->get();
+        $activationKeys = [];
+        $totalPrice = 0;
+        foreach($games as $game) {
+            $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
+            $activationKeys[] = $game;
+            $totalPrice += $game->price;
+        }
+        //dd(compact('order', 'user', 'games', 'activationKeys', 'totalPrice')); 
+        $pdf = PDF::loadView('pdf.invoice', compact('order', 'user', 'games', 'activationKeys', 'totalPrice'));
+        return $pdf->download('invoice.pdf');
+    }
+
 
     function getCustomerReviewByMark($game_id) {
         $customerReviewByMark = [];

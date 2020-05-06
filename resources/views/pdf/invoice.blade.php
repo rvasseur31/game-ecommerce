@@ -36,7 +36,7 @@
             </div>
 
             <div class="col-xs-4">
-                <img src="https://res.cloudinary.com/dqzxpn5db/image/upload/v1537151698/website/logo.png" alt="logo">
+                <img src="{{ asset('assets/logo2.png') }}" alt="logo">
             </div>
         </div>
 
@@ -47,8 +47,9 @@
                 <h4>Vers :</h4>
                 <address>
                     <strong>{{ $user->firstname }} {{ $user->lastname }}</strong><br>
-                    <span>{{ $user->email }}</span> <br>
-                    <span>123 Address St.</span>
+                    <span>{{ $user->email }}</span><br>
+                    <span>{{ $order->address }}, {{ $order->sub_address }}</span><br>
+                    <span>{{ $order->country }}, {{ $order->state }}, {{ $order->zip }}</span>
                 </address>
             </div>
 
@@ -57,11 +58,11 @@
                     <tbody>
                         <tr>
                             <th>Numéro de facture :</th>
-                            <td class="text-right">56</td>
+                            <td class="text-right">{{ $order->id }}</td>
                         </tr>
                         <tr>
                             <th>Date : </th>
-                            <td class="text-right">Oct 1, 2018</td>
+                            <td class="text-right">{{ $order->created_at }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,7 +75,7 @@
                             <th style="padding: 5px">
                                 <div>Total (€) :</div>
                             </th>
-                            <td style="padding: 5px" class="text-right"><strong>600 €</strong></td>
+                            <td style="padding: 5px" class="text-right"><strong>{{ $totalPrice }} €</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -90,24 +91,17 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($activationKeys as $activationKey)
                 <tr>
                     <td>
-                        <div><strong>Fifa 20</strong></div>
-                        <p>Description here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt maiores
-                            placeat similique nisi. Nisi ratione, molestias exercitationem illo reiciendis cumque?</p>
+                        <div><strong>{{ $activationKey->title }}</strong></div>
+                        <p>{{ $activationKey->description }}</p>
+                        <p>Clé d'activation : {{ $activationKey->activation_key }}</p>
                     </td>
                     <td></td>
-                    <td class="text-right">300€</td>
+                    <td class="text-right">{{ $activationKey->price }}€</td>
                 </tr>
-                <tr>
-                    <td>
-                        <div><strong>Fifa 19</strong></div>
-                        <p>Description here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt maiores
-                            placeat similique nisi. Nisi ratione, molestias exercitationem illo reiciendis cumque?</p>
-                    </td>
-                    <td></td>
-                    <td class="text-right">300€</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -120,7 +114,7 @@
                             <th style="padding: 5px">
                                 <div>Total (€) :</div>
                             </th>
-                            <td style="padding: 5px" class="text-right"><strong>600 €</strong></td>
+                            <td style="padding: 5px" class="text-right"><strong>{{ $totalPrice }} €</strong></td>
                         </tr>
                     </tbody>
                 </table>

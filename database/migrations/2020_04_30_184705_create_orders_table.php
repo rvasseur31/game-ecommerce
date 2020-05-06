@@ -4,18 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameBuyByUsersTable extends Migration {
+class CreateOrdersTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('game_buy_by_users', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('game_activation_key_id');
-            $table->integer('order_id');
+            $table->text('address');
+            $table->string('sub_address');
+            $table->string('country');
+            $table->string('state');
+            $table->string('zip');
             $table->timestamps();
         });
     }
@@ -25,7 +30,8 @@ class CreateGameBuyByUsersTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-        Schema::dropIfExists('game_buy_by_users');
+    public function down()
+    {
+        Schema::dropIfExists('orders');
     }
 }
