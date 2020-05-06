@@ -62,7 +62,6 @@
                                 document.getElementById('logout-form').submit();">
                                 Déconnexion
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -73,7 +72,8 @@
                             class="badge badge-danger">{{ session('cart')->totalQuantity ?? 0 }}</span></a>
                     <div class="shopping-cart">
                         <div class="shopping-cart-header">
-                            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge badge-danger">{{ session('cart')->totalQuantity ?? 0}}</span>
+                            <i class="fa fa-shopping-cart cart-icon"></i><span
+                                class="badge badge-danger">{{ session('cart')->totalQuantity ?? 0}}</span>
                             <div class="shopping-cart-total">
                                 <span class="lighter-text">Total:</span>
                                 <span class="main-color-text total">{{ session('cart')->totalPrice ?? 0}} €</span>
@@ -81,10 +81,9 @@
                         </div>
 
                         <ul class="shopping-cart-items">
-                            @foreach(session('cart')->items ?? [] as $item) 
+                            @foreach(session('cart')->items ?? [] as $item)
                             <li class="clearfix">
-                                <img src="{{ asset('storage/images/'.$item['item']->filename) }}"
-                                    alt="item1" />
+                                <img src="{{ asset('storage/images/'.$item['item']->filename) }}" alt="item1" />
                                 <span class="item-name">{{ $item['item']->title}}</span>
                                 <span class="item-detail">{{ $item['item']->platform}}</span>
                                 <span class="item-price">{{ $item['price']}} €</span>
@@ -94,12 +93,15 @@
                             @endforeach
                         </ul>
 
-                        <a href="#" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
+                        <a href="{{ url('/shopping-bar') }}" class="button">Checkout <i
+                                class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
 
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" method="POST" action="{{url('/search') }}">
+                    @csrf
+                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                        aria-label="Search">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

@@ -11,6 +11,7 @@ use App\Order;
 use App\Repositories\User\UserInterface;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 
 class PublicController extends Controller {
@@ -67,6 +68,24 @@ class PublicController extends Controller {
     public function shoppingBag() {
         return view('shopping-bag')
             ->with('platforms', Platform::all());
+    }
+
+    public function searchGame(Request $request) {
+        $request = $request->get('search');
+        $games = GamePlatform::join('games', 'games.id', '=', 'game_platforms.game_id')
+            ->join('platforms', 'platforms.id', '=', 'game_platforms.platform_id')
+            ->select('game_platforms.*')
+            ->addSelect('games.title')
+            ->addSelect('games.description')
+            ->addSelect('platforms.platform')
+            ->where ('title', 'LIKE', '%' . $request . '%')->orWhere('description', 'LIKE', '%' . $request . '%' )->paginate(12);
+        if (count($games) > 0){
+            return view('perPlatform')
+                ->with('platforms', Platform::all())
+                ->with('games', $games);
+        }
+        // else return view ('perPlatform')->withMessage('No Details found. Try to search again !');
+        else return 0;
     }
 
     public function userInvoice($user_id, $order_id) {

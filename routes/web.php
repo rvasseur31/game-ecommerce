@@ -43,3 +43,4 @@ Route::get('/shopping-bag', 'PublicController@shoppingBag');
 Route::resource('/order', 'OrderController');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
+Route::post('/search', 'PublicController@searchGame');
