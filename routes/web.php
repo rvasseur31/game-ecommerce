@@ -49,4 +49,4 @@ Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
 Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail');
 
 Route::post('/search', 'PublicController@searchGame');
-
+Route::get('/dashboard', 'AdminDashboardController@index');

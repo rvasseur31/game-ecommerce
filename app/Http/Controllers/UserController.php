@@ -25,6 +25,10 @@ class UserController extends Controller
             ->with('users', User::all());
     }
 
+    public function count() {
+        $nbr = DB::table('users')->count();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
