@@ -44,6 +44,7 @@ class PublicController extends Controller {
     }
 
     public function product(int $game_id) {
+        GamePlatform::addView($game_id);
         return view('product')
             ->with('liked', $this->userRepository->isFavorite($game_id))
             ->with('platforms', Platform::all())
