@@ -88,19 +88,16 @@ class PublicController extends Controller {
         else return 0;
     }
 
-    public function userInvoice($user_id, $order_id) {
-        $order = Order::find($order_id);
-        $user = User::find($user_id);
-        $games = Game_buy_by_user::where('order_id', $order_id)->get();
-        $activationKeys = [];
-        $totalPrice = 0;
-        foreach($games as $game) {
-            $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
-            $activationKeys[] = $game;
-            $totalPrice += $game->price;
-        }
-        //dd(compact('order', 'user', 'games', 'activationKeys', 'totalPrice')); 
-        $pdf = PDF::loadView('pdf.invoice', compact('order', 'user', 'games', 'activationKeys', 'totalPrice'));
+    public function sendEmail($user_id, $order_id) {
+        $userInformation = $this->getInvoiceInformation($user_id, $order_id); 
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        mail($userInformation["user"]->email, 'Facture', view('pdf.invoice', $userInformation), $headers);
+        return redirect(route('index'));
+    }
+
+    public function userInvoice($user_id, $order_id) { 
+        $pdf = PDF::loadView('pdf.invoice', $this->getInvoiceInformation($user_id, $order_id));
         return $pdf->download('invoice.pdf');
     }
 
@@ -112,5 +109,19 @@ class PublicController extends Controller {
                 ->where('rating', $index);
         }
         return $customerReviewByMark;
+    }
+
+    function getInvoiceInformation($user_id, $order_id) {
+        $order = Order::find($order_id);
+        $user = User::find($user_id);
+        $games = Game_buy_by_user::where('order_id', $order_id)->get();
+        $activationKeys = [];
+        $totalPrice = 0;
+        foreach($games as $game) {
+            $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
+            $activationKeys[] = $game;
+            $totalPrice += $game->price;
+        }
+        return compact('order', 'user', 'games', 'activationKeys', 'totalPrice');
     }
 }

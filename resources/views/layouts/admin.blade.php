@@ -280,9 +280,15 @@
                         <span class="menu-text">Utilisateurs</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin-order.index') }}">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span class="menu-text">Les commandes</span>
+                    </a>
+                </li>
             </ul>
         </div>
-        <main id="page-content-wrapper">
+        <main id="page-content-wrapper" class="mt-5">
             @yield('content')
         </main>
     </div>

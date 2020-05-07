@@ -16,7 +16,12 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('order.index')->with('orders', Order::all());
+        $orders = Order::join('users', 'users.id', '=', 'orders.user_id')
+        ->select('orders.*')
+        ->addSelect('users.firstname')
+        ->addSelect('users.lastname')
+        ->get();
+        return view('admin.order.index', compact('orders'));
     }
 
     /**

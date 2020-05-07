@@ -1,5 +1,6 @@
 <?php
 
+use App\Game_buy_by_user;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Mail\mailme;
@@ -11,7 +12,7 @@ use App\Mail\mailme;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the 'web' middleware group. Now create something great!
 |
 */
 
@@ -29,18 +30,23 @@ Route::post('/admin-customer-review/{id}', 'CustomerReviewController@confirmCust
 
 Route::resource('admin-platform', 'PlatformController');
 
-Route::resource('/profile', "ProfileController");
+Route::resource('/profile', 'ProfileController');
 
-Route::resource('/admin-user', "UserController");
+Route::resource('/admin-user', 'UserController');
 
-Route::get('/admin-game/create/one', "GamePlatformController@createStepOne");
-Route::post('/admin-game/create/one', "GamePlatformController@postStepOne")->name('admin-game.store-step-one');
-Route::get('/admin-game/create/two', "GamePlatformController@createStepTwo");
-Route::resource('/admin-game', "GamePlatformController");
+Route::resource('/admin-order', 'OrderController');
+
+Route::get('/admin-game/create/one', 'GamePlatformController@createStepOne');
+Route::post('/admin-game/create/one', 'GamePlatformController@postStepOne')->name('admin-game.store-step-one');
+Route::get('/admin-game/create/two', 'GamePlatformController@createStepTwo');
+Route::resource('/admin-game', 'GamePlatformController');
 
 Route::post('/add-to-cart/{id}', 'PublicController@addToCart')->name('addToCart');
 Route::get('/shopping-bag', 'PublicController@shoppingBag');
 Route::resource('/order', 'OrderController');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
+Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail');
+
 Route::post('/search', 'PublicController@searchGame');
+
