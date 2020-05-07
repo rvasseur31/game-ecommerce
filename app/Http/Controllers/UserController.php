@@ -10,11 +10,6 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
 
-    public function game(){
-        return $this->hasOne('App\Game_activation_key');
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +18,6 @@ class UserController extends Controller
     public function index() {
         return view('admin.user.index')
             ->with('users', User::all());
-    }
-
-    public function count() {
-        $nbr = DB::table('users')->count();
     }
 
     /**
@@ -81,10 +72,8 @@ class UserController extends Controller
         foreach ($inputs as $key => $value) {
             $user->$key = $value;
         }
-        $user->password = Hash::make($request->get('password'));
         $user->save();
-
-        return redirect(route('profile.index'))->with('success', 'Utilisateur mis à jour avec succès !');
+        return redirect(route('admin-user.index'))->with('success', 'Utilisateur mis à jour avec succès !');
     }
 
     /**

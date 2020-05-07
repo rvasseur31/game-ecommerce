@@ -12,7 +12,7 @@ class PlatformController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.platforms.index')->with('platforms', Platform::all());
+        return view('admin.platform.index')->with('platforms', Platform::all());
     }
 
     /**
@@ -21,7 +21,7 @@ class PlatformController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.platforms.create');
+        return view('admin.platform.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PlatformController extends Controller {
         }
         $platform->save();
 
-        return redirect(route('admin-platforms.index'))->with('success', 'Jeu enregistré avec succès !');
+        return redirect(route('admin-platform.index'))->with('success', 'Plateforme créée avec succès !');
     }
 
     /**
@@ -58,7 +58,7 @@ class PlatformController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($platform) {
-        return view('admin.platforms.edit', ['platform' => Platform::find($platform)]);
+        return view('admin.platform.edit', ['platform' => Platform::find($platform)]);
     }
 
     /**
@@ -76,7 +76,7 @@ class PlatformController extends Controller {
         }
         $platform->save();
 
-        return redirect(route('admin-platforms.index'))->with('success', 'Jeu mis à jour avec succès !');
+        return redirect(route('admin-platform.index'))->with('success', 'Plateforme mise à jour avec succès !');
     }
 
     /**
@@ -88,7 +88,6 @@ class PlatformController extends Controller {
     public function destroy($platform) {
         $platform = Platform::find($platform);
         $platform->delete();
-
-        return redirect(route('admin-platforms.index'))->with('success', 'platform supprimé avec succès !');
+        return redirect(route('admin-platform.index'))->with('success', 'Plateforme supprimée avec succès !');
     }
 }

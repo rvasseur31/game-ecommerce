@@ -21,36 +21,52 @@ Route::get('/platform/{id}', 'PublicController@gamePerPlatform')->name('platform
 Route::get('/product/{id}', 'PublicController@product')->name('product');
 Route::post('/favorite', 'GameLikedByUserController@favorite')->name('favorite');
 
+// Route de connexion
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/admin-customer-review', 'CustomerReviewController');
-Route::post('/admin-customer-review/{id}', 'CustomerReviewController@confirmCustomerReview')->name('admin-customer-review.confirmCustomerReview');
-
-Route::resource('admin-platform', 'PlatformController');
-
-Route::resource('/profile', 'ProfileController');
-
-Route::resource('/admin-user', 'UserController');
-
-Route::resource('/admin-order', 'OrderController');
-
-Route::get('/admin-game/create/one', 'GamePlatformController@createStepOne');
-Route::post('/admin-game/create/one', 'GamePlatformController@postStepOne')->name('admin-game.store-step-one');
-Route::get('/admin-game/create/two', 'GamePlatformController@createStepTwo');
-Route::resource('/admin-game', 'GamePlatformController');
 
 Route::post('/add-to-cart/{id}', 'PublicController@addToCart')->name('addToCart');
 Route::get('/shopping-bag', 'PublicController@shoppingBag');
-Route::resource('/order', 'OrderController');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
 Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail');
 
 Route::post('/search', 'PublicController@searchGame');
-Route::get('/dashboard', 'AdminDashboardController@index');
 
-Route::get('test', function () {
-    return Game_buy_by_user::getAllGamesBougth();
+Route::group(['middleware' => 'auth'], function () {
+    // Profile lambda user
+    Route::resource('/profile', 'ProfileController')->only([
+        'index', 'update'
+    ]);
+
+    Route::prefix('admin')->name('admin-')->middleware('admin')->group(function() {
+        // Access to dashboard
+        Route::get('dashboard', 'AdminDashboardController@index');
+    
+        // Crud Game
+        Route::get('game/create/one', 'GamePlatformController@createStepOne')->name('game.create-step-one');
+        Route::post('game/create/one', 'GamePlatformController@postStepOne')->name('game.store-step-one');
+        Route::get('game/create/two', 'GamePlatformController@createStepTwo')->name('game.create-step-one');
+        Route::resource('game', 'GamePlatformController');
+    
+        // Crud Platform
+        Route::resource('platform', 'PlatformController')->except([
+            'show'
+        ]);
+    
+        // Crud User
+        Route::resource('user', 'UserController')->only([
+            'index', 'update', 'destroy', 'edit', 'index'
+        ]);
+    
+        // Crud Customer review
+        Route::resource('customer-review', 'CustomerReviewController');
+        Route::post('customer-review/{id}', 'CustomerReviewController@confirmCustomerReview')->name('customer-review.confirmCustomerReview');
+    
+        // Crud Order
+        Route::resource('/order', 'OrderController')->only([
+            'index'
+        ]);
+    }); 
 });

@@ -79,7 +79,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inputs = $request->except('_token', '_method');
+        if (!$request->get('password') && !$request->get('password-confirm')) {
+            $inputs = $request->except('_token', '_method', 'password', 'password-confirm');
+        }
+        $user = User::find($id);
+        foreach ($inputs as $key => $value) {
+            $user->$key = $value;
+        }
+        if ($request->get('password')) {
+            $user->password = Hash::make($request->get('password'));
+        }
+        $user->save();
+        return redirect(route('profile.index'))->with('success', 'Profil mis à jour avec succès !');
     }
 
     /**
