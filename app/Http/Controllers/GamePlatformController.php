@@ -138,7 +138,9 @@ class GamePlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($gamePlatform) {
-        return view('gamePlatform.edit', ['gamePlatform' => GamePlatform::find($gamePlatform)]);
+        return view('admin.game.edit')
+            ->with('platforms', Platform::all())
+            ->with('game', GamePlatform::find($gamePlatform));
     }
 
     /**

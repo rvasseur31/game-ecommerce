@@ -9,6 +9,6 @@ class AdminDashboardController extends Controller
 {
     public function index() {
         return view('dashboard.index')
-        ->with('users', UserController::count());
+        ->with('users', User::count());
     }
 }

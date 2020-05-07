@@ -50,3 +50,7 @@ Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail');
 
 Route::post('/search', 'PublicController@searchGame');
 Route::get('/dashboard', 'AdminDashboardController@index');
+
+Route::get('test', function () {
+    return Game_buy_by_user::getAllGamesBougth();
+});
