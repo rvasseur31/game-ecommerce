@@ -157,8 +157,7 @@ class GamePlatformController extends Controller
             $gamePlatform->$key = $value;
         }
         $gamePlatform->save();
-
-        return redirect(route('gamePlatform.index'))->with('success', 'Jeu mis à jour avec succès !');
+        return redirect(route('admin-game.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**

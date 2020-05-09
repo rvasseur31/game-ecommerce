@@ -14,10 +14,9 @@ class Admin
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if (auth()->user()->administrator == 1) {
-            return next($request);
+        if (Auth()->check() && Auth()->user()->administrator) {
+            return $next($request);
         }
-
-        return "Vous n'êtes pas administrateur";
+        abort(403);
     }
 }

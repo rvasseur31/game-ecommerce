@@ -46,4 +46,10 @@ class GamePlatform extends Model {
             ->addSelect('platforms.platform')
             ->get();
     }
+
+    public static function addView($game_id) {
+        $game = GamePlatform::findOrFail($game_id);
+        $game->view++;
+        $game->save();
+    }
 }

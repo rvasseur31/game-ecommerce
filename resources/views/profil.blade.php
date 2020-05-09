@@ -6,6 +6,13 @@
 
 @section('content')
 <div class="container pt-4">
+    <div class="col-sm-12">
+        @if(session()->get('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
+    </div>
     <div class="row">
         <div class="col-sm-3">
             <div class="text-center">
@@ -32,7 +39,9 @@
             </ul>
             <div class="tab-content container pt-2">
                 <div class="tab-pane container active" id="profile">
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <form class="form" action="{{ route('profile.update', Auth::id()) }}" method="post">
+                        @method('PATCH')
+                        @csrf
                         <div class="form-label-group">
                             <input type="text" id="input-firstname" name="firstname"
                                 class="form-control @error('firstname') is-invalid @enderror" placeholder="Prénom"
@@ -68,8 +77,7 @@
                         </div>
                         <div class="form-label-group">
                             <input type="text" id="input-password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" placeholder="Mot de passe"
-                                required>
+                                class="form-control @error('password') is-invalid @enderror" placeholder="Mot de passe">
                             <label for="inputPassword">Mot de passe</label>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -80,7 +88,7 @@
                         <div class="form-label-group">
                             <input type="text" id="input-password-confirm" name="password-confirm"
                                 class="form-control @error('password-confirm') is-invalid @enderror"
-                                placeholder="Confirmer votre mot de passe" required>
+                                placeholder="Confirmer votre mot de passe">
                             <label for="inputPassword-confirm">Confirmer votre mot de passe</label>
                             @error('password-confirm')
                             <span class="invalid-feedback" role="alert">
@@ -91,7 +99,7 @@
                         <div class="form-label-group">
                             <input type="date" id="input-born_date" name="born_date"
                                 class="form-control @error('born_date') is-invalid @enderror"
-                                placeholder="Date de naissance" required>
+                                placeholder="Date de naissance" value="{{Auth::user()->born_date}}">
                             <label for="inputborn_date">Date de naissance</label>
                             @error('born_date')
                             <span class="invalid-feedback" role="alert">
@@ -114,7 +122,8 @@
                     <ul class="list-group">
                         <li class="list-group-item active">Mes commandes : </li>
                         @foreach($orders as $order)
-                        <a href="{{ url('/invoice/'.Auth::id().'/'.$order->id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a href="{{ url('/invoice/'.Auth::id().'/'.$order->id) }}"
+                            class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Commande passée le {{ $order->created_at }}</h5>
                                 <small>Voir en détail</small>

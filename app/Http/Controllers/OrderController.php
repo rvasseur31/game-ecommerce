@@ -30,7 +30,6 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('order.create');
     }
 
     /**
@@ -86,7 +85,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($order) {
-        return view('order.edit', ['order' => Order::find($order)]);
+        
     }
 
     /**
@@ -97,14 +96,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $order) {
-        $inputs = $request->except('_token', '_method');
-        $order = Order::find($order);
-        foreach ($inputs as $key => $value) {
-            $order->$key = $value;
-        }
-        $order->save();
 
-        return redirect(route('order.index'))->with('success', 'Jeu mis à jour avec succès !');
     }
 
     /**
@@ -114,9 +106,5 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($order) {
-        $order = Order::find($order);
-        $order->delete();
-
-        return redirect(route('order.index'))->with('success', 'order supprimé avec succès !');
     }
 }
