@@ -10,19 +10,17 @@
             <div class="col-lg-3 mb-4">
                 <div class="card bg-dark text-white shadow">
                   <div class="card-body text-uppercase">
-                    @foreach($users as $user)
                     <h1 style="float:left ">Membres </h1>
-                    <h1 class="text-white-40" style="float:right"><i class="fa fa-user" aria-hidden="true"></i><span id="casesCountry">{{$nbr}}</span></h1>
-                    @endforeach
+                    <h1 class="text-white-40" style="float:right"><i class="fa fa-user" aria-hidden="true"></i>{{$usersTotal}}</h1>
                   </div>
                 </div>
               </div>
-        
+              
               <div class="col-lg-3 mb-4">
                 <div class="card bg-danger text-white shadow">
                   <div class="card-body text-uppercase">
                     <h1 style="float:left">Ventes </h1>
-                    <h1 class="text-white-40" style="float:right"><i class="fa fa-gamepad" aria-hidden="true"></i><span id="deadCountry"><i class="fas fa-spinner fa-pulse"></i></span></h1>
+                    <h1 class="text-white-40" style="float:right"><br><i class="fa fa-gamepad" aria-hidden="true"></i>{{$gamesbuyTotal}}</h1>
                   </div>
                 </div>
               </div>
@@ -32,7 +30,7 @@
                 <div class="card bg-success text-white shadow">
                   <div class="card-body text-uppercase">
                     <h1 style="float:left ">Revenus Total </h1>
-                    <h1 class="text-white-40" style="float:right"><i class="fa fa-credit-card" aria-hidden="true"></i><span id="recoveredCountry"><i class="fas fa-spinner fa-pulse"></i></span></h1>
+                    <h1 class="text-white-40" style="float:right"><i class="fa fa-credit-card" aria-hidden="true"></i>{{$revenueTotal}}</h1>
                   </div>
                 </div>
               </div>
