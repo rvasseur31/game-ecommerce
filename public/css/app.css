@@ -10891,6 +10891,10 @@ a.text-dark:focus {
   max-width: 18rem;
 }
 
+.paginate-button nav {
+  background-color: transparent;
+}
+
 .slick-slide .card {
   display: block !important;
 }
@@ -10903,10 +10907,6 @@ a.text-dark:focus {
 
 .card-title {
   min-height: 54px;
-}
-
-.navbar {
-  background-color: #7B68EE;
 }
 
 .truncate-after-3-line {

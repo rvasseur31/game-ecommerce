@@ -87,13 +87,24 @@
                                 <span class="item-name">{{ $item['item']->title}}</span>
                                 <span class="item-detail">{{ $item['item']->platform}}</span>
                                 <span class="item-price">{{ $item['price']}} €</span>
-                                <span class="item-quantity">Quantité: {{ $item['quantity']}}
-                                </span>
+                                <span class="item-quantity">Quantité: {{ $item['quantity']}}</span>
+                                <br>
+                                <div class="d-flex justify-content-end">
+                                    <form action="{{ route('removeToCart', ['id' => $item['item']->id]) }}" method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="btn btn btn-link product-add-to-cart"><i class="fas fa-minus"></i></button>
+                                    </form>
+                                    <form action="{{ route('addToCart', ['id' => $item['item']->id]) }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn btn-link product-add-to-cart ml-1"><i class="fas fa-plus"></i></button>
+                                    </form>
+                                </div>
                             </li>
                             @endforeach
                         </ul>
 
-                        <a href="{{ url('/shopping-bar') }}" class="button">Checkout <i
+                        <a href="{{ url('/shopping-bag') }}" class="button">Paiement<i
                                 class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>

@@ -63,7 +63,19 @@ class PublicController extends Controller {
         session(['cart' => $cart]);
         
         //dd(session('cart', null));
-        return redirect(route('index'));
+        return back()->withInput();
+    }
+
+    public function removeToCart($game_id) {
+        $game = GamePlatform::game($game_id);
+        $oldCart = session('cart', null);
+        $cart = new Cart($oldCart);
+        $cart->remove($game, $game_id);
+
+        session(['cart' => $cart]);
+        
+        //dd(session('cart', null));
+        return back()->withInput();
     }
 
     public function shoppingBag() {

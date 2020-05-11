@@ -19,7 +19,18 @@
                         <h6 class="my-0">{{ $item['price']}} €</h6>
                         <small class="text-muted">x{{ $item['quantity']}}</small>
                     </div>
-
+                    <div class="d-flex justify-content-end">
+                        <form action="{{ route('removeToCart', ['id' => $item['item']->id]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn btn-link product-add-to-cart"><i
+                                    class="fas fa-minus"></i></button>
+                        </form>
+                        <form action="{{ route('addToCart', ['id' => $item['item']->id]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn btn-link product-add-to-cart ml-1"><i
+                                    class="fas fa-plus"></i></button>
+                        </form>
+                    </div>
                 </li>
                 @endforeach
                 <!-- <li class="list-group-item d-flex justify-content-between bg-light">
@@ -47,7 +58,7 @@
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">
                 Adresse de facturation</h4>
-            <form class="needs-validation" novalidate="" method="POST" action="{{ route('order.store') }}">
+            <form class="needs-validation" method="POST" action="{{ route('order.store') }}">
                 @csrf
                 <input type="hidden" value="{{ Auth::id() }}" name="user_id">
                 <div class="mb-3">

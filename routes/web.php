@@ -27,6 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::post('/add-to-cart/{id}', 'PublicController@addToCart')->name('addToCart');
+Route::post('/remove-to-cart/{id}', 'PublicController@removeToCart')->name('removeToCart');
 Route::get('/shopping-bag', 'PublicController@shoppingBag');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
@@ -38,6 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Profile lambda user
     Route::resource('/profile', 'ProfileController')->only([
         'index', 'update'
+    ]);
+
+    Route::resource('/order', 'OrderController')->only([
+        'store'
     ]);
 
     Route::prefix('admin')->name('admin-')->middleware('admin')->group(function() {
