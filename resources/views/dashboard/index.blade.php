@@ -30,7 +30,7 @@
                 <div class="card bg-success text-white shadow">
                   <div class="card-body text-uppercase">
                     <h1 style="float:left ">Revenus Total </h1>
-                    <h1 class="text-white-40" style="float:right"><i class="fa fa-credit-card" aria-hidden="true"></i>{{$revenueTotal}}</h1>
+                    <h1 class="text-white-40" style="float:right"><i class="fa fa-credit-card" aria-hidden="true"></i></h1>
                   </div>
                 </div>
               </div>

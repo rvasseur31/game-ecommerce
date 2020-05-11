@@ -14,8 +14,8 @@ class AdminDashboardController extends Controller
     public function index() {
         return view('dashboard.index')
         ->with('usersTotal', User::count())
-        ->with('gamesbuyTotal', Game_buy_by_user::count())
-        ->with('revenueTotal', GamePlatform::count('price')->value('price'));
+        ->with('gamesbuyTotal', Game_buy_by_user::count());
+         ->with('revenueTotal', GamePlatform::count('price')->value('price'));
     }
 
     //Fonction 7 JOURS AVANT
@@ -25,7 +25,7 @@ class AdminDashboardController extends Controller
     //     return EventItem::all()->whereBetween('created_at', [$inputs["date"], $endDate]);
     // }
 
-    
+
     //AJOUTER
     // 'created_at'=>new DateTime(),
     // 'updated_at'=>new DateTime()
