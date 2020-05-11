@@ -106,7 +106,7 @@ class PublicController extends Controller {
         $headers = "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
         mail($userInformation["user"]->email, 'Facture', view('pdf.invoice', $userInformation), $headers);
-        return redirect(route('index'));
+        return redirect(route('index'))->with('success', 'La facuture est disponible dans votre espace personnel');
     }
 
     public function userInvoice($user_id, $order_id) { 

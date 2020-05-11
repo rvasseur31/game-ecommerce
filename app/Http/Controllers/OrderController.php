@@ -41,6 +41,14 @@ class OrderController extends Controller
     public function store(Request $request) {
         //dd(session('cart'));
         $inputs = $request->except('_token');
+
+        $user = User::find($inputs['user_id']);
+        if ($user->balance - session('cart')->totalPrice < 0) {
+            return back()->withInput($request->input())->withErrors(['Vous n\'avez pas assez d\'argent']);
+        }
+        $user->balance -= session('cart')->totalPrice;
+        $user->save();
+
         $order = new Order();
         foreach ($inputs as $key => $value) {
             $order->$key = $value;
@@ -58,14 +66,9 @@ class OrderController extends Controller
             $newGameBuy->order_id = $order->id;
             $newGameBuy->save();
         }
-
-        $user = User::find($inputs['user_id']);
-        $user->balance = session('cart')->totalPrice;
-        $user->save();
-
         session(['cart' => null]);
 
-        return redirect(route('index'))->with('success', 'Jeu enregistré avec succès !');
+        return redirect(route('sendMail', [Auth()->user()->id, $order->id] ));
     }
 
     /**

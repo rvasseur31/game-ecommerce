@@ -40,6 +40,13 @@
                     </div>
                     <span class="text-success">-$5</span>
                 </li> -->
+                @if($errors->any())
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-danger">
+                        <h6 class="my-0">{{$errors->first()}}</h6>
+                    </div>
+                </li>
+                @endif
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (€) :</span>
                     <strong>{{ session('cart')->totalPrice ?? 0}} €</strong>
@@ -64,7 +71,7 @@
                 <div class="mb-3">
                     <label for="address">Adresse :</label>
                     <input type="text" class="form-control" id="address" placeholder="1234 Main St" required=""
-                        name="address">
+                        name="address" value="{{ old('address') }}">
                     <div class="invalid-feedback">
                         Une adresse valide est requise.
                     </div>
@@ -73,7 +80,7 @@
                 <div class="mb-3">
                     <label for="address2">Complément d'adresse :<span class="text-muted">(Optionel)</span></label>
                     <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"
-                        name="sub_address">
+                        name="sub_address" value="{{ old('sub_address') }}">
                 </div>
 
                 <div class="row">
@@ -81,7 +88,7 @@
                         <label for="country">Pays</label>
                         <select class="custom-select d-block w-100" id="country" name="country" required="">
                             <option value="">Choisir...</option>
-                            <option>France</option>
+                            <option {{ old("country") == 'France' ? "selected":"" }}>France</option>
                         </select>
                         <div class="invalid-feedback">
                             Entrer un pays valide.
@@ -91,7 +98,7 @@
                         <label for="state">Région</label>
                         <select class="custom-select d-block w-100" id="state" name="state" required="">
                             <option value="">Choisir...</option>
-                            <option>Occitanie</option>
+                            <option {{ old("country") == 'Occitanie' ? "selected":"" }}>Occitanie</option>
                         </select>
                         <div class="invalid-feedback">
                             Entrer une région valide.
@@ -99,7 +106,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="zip">Code postal</label>
-                        <input type="text" class="form-control" id="zip" name="zip" placeholder="" required="">
+                        <input type="text" class="form-control" id="zip" name="zip" placeholder="" required="" value="{{ old('zip') }}">
                         <div class="invalid-feedback">
                             Un code postal valide est requis
                         </div>

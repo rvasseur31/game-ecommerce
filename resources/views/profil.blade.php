@@ -107,11 +107,22 @@
                             </span>
                             @enderror
                         </div>
+                        <div class="form-label-group">
+                            <input type="number" id="input-balance" name="balance"
+                                class="form-control @error('balance') is-invalid @enderror"
+                                placeholder="Date de naissance" value="{{Auth::user()->balance}}">
+                            <label for="inputbalance">Date de naissance</label>
+                            @error('balance')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit"><i
-                                        class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                        class="glyphicon glyphicon-ok-sign"></i>Save</button>
                                 <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
                                     Reset</button>
                             </div>

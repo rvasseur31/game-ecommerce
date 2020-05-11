@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Game_buy_by_user;
 
-class AdminDashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index() {
-        return view('dashboard.index')
+        return view('admin.dashboard.index')
         ->with('totalUsers', User::count())
         ->with('totalGamesBuy', Game_buy_by_user::count())
         ->with('lastSevenDaysGamesBuy', Game_buy_by_user::getLastSevenDaysGamesBougth())

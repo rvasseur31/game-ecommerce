@@ -1,9 +1,7 @@
 <?php
 
-use App\Game_buy_by_user;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Mail\mailme;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +29,7 @@ Route::post('/remove-to-cart/{id}', 'PublicController@removeToCart')->name('remo
 Route::get('/shopping-bag', 'PublicController@shoppingBag');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
-Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail');
+Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail')->name('sendMail');
 
 Route::post('/search', 'PublicController@searchGame');
 
@@ -47,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::prefix('admin')->name('admin-')->middleware('admin')->group(function() {
         // Access to dashboard
-        Route::get('dashboard', 'AdminDashboardController@index');
+        Route::get('dashboard', 'DashboardController@index');
     
         // Crud Game
         Route::get('game/create/one', 'GamePlatformController@createStepOne')->name('game.create-step-one');

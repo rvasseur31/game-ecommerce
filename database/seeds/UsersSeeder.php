@@ -10,7 +10,7 @@ class UsersSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(User::class, 4)->create()->each(function ($user) {
+        factory(User::class, 1)->create()->each(function ($user) {
             $user->save();
         });
     }
