@@ -10,8 +10,8 @@
             <form method="post" action="{{ route('admin-customer-review.store') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="nom">Nom utilisateur (id) :</label>
-                    <input type="text" class="form-control" name="user_id" />
+                    <label for="nom">Jeu (id) :</label>
+                    <input type="number" class="form-control" name="game_platforms_id" />
                 </div>
 
                 <div class="form-group">

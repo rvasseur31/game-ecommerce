@@ -20,7 +20,7 @@ class CreateCustomerReviewsTable extends Migration
             $table->integer('rating');
             $table->string('title');
             $table->text('description');
-            $table->boolean('validated');
+            $table->boolean('validated')->default(false);
             $table->timestamps();
         });
     }

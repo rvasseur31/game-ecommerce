@@ -48,9 +48,12 @@ class CustomerReviewController extends Controller {
         foreach ($inputs as $key => $value) {
             $customerReview->$key = $value;
         }
+        $customerReview->user_id = Auth::id();
         $customerReview->save();
-
-        return redirect(route('admin-customer-review.index'))->with('success', 'Avis enregistré avec succès !');
+        if (Auth::user()->administrator) {
+            return redirect(route('admin-customer-review.index'))->with('success', 'Avis enregistré avec succès !');
+        }
+        return back();
     }
 
     /**
@@ -88,8 +91,10 @@ class CustomerReviewController extends Controller {
             $customerReview->$key = $value;
         }
         $customerReview->save();
-
-        return redirect(route('admin-customer-review.index'))->with('success', 'Avis mis à jour avec succès !');
+        if (Auth::user()->administrator) {
+            return redirect(route('admin-customer-review.index'))->with('success', 'Avis mis à jour avec succès !');
+        }
+        return back();
     }
 
     /**

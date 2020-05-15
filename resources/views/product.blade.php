@@ -111,7 +111,7 @@
                 @csrf
                 <button type="submit" class="btn btn-primary product-add-to-cart">Ajouter au panier</button>
             </form>
-            
+
             <form action="{{ route('favorite') }}" method="post">
                 @csrf
                 <input type="hidden" name="product" value="{{ $game->id }}">
@@ -203,29 +203,37 @@
             </div>
             @endfor
         </div>
-        @foreach($customerReviews as $customerReview)
+        @foreach($customerReviews as $key => $customerReview)
         <div class="card mb-3">
             <div class="card-header">
-                <div class="d-flex justify-content-start">
-                    <div class="customer-review-mark d-flex justify-content-start pt-1">
-                        @for ($index = 0; $index < $customerReview->rating; $index++)
-                            <span class="fa fa-star text-primary"></span>
-                            @endfor
-                            @for ($index = 0; $index < 5 - $customerReview->rating; $index++)
-                                <span class="fa fa-star"></span>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <div class="customer-review-mark d-flex justify-content-start pt-1">
+                            @for ($index = 0; $index < $customerReview->rating; $index++)
+                                <span class="fa fa-star text-primary"></span>
                                 @endfor
+                                @for ($index = 0; $index < 5 - $customerReview->rating; $index++)
+                                    <span class="fa fa-star"></span>
+                                    @endfor
+                        </div>
+                        <div class="ml-3 customer-review-user-firstname">
+                            {{$customerReview->firstname}}
+                        </div>
+                        <div class="ml-3 customer-review-posted-at">
+                            {{$customerReview->created_at}}
+                        </div>
                     </div>
-                    <div class="ml-3 customer-review-user-firstname">
-                        {{$customerReview->firstname}}
-                    </div>
-                    <div class="ml-3 customer-review-posted-at">
-                        {{$customerReview->created_at}}
-                    </div>
+                    @if (Auth::id() == $customerReview->user_id)
+                    <button type="button" class="btn btn-link edit-customer-review" data-toggle="modal"
+                        data-target="#modal-edit-customer-review" data-id="{{ $key }}"  data-customer-review-id="{{ $customerReview->id }}"><i
+                            class="fas fa-edit"></i></button>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
-                <h4>{{ $customerReview->title }}</h4>
-                <p>{{ $customerReview->description }}</p>
+                <h4 class="customer-review-title-{{$key}}">{{ $customerReview->title }}</h4>
+                <p class="customer-review-description-{{$key}}">{{ $customerReview->description }}</p>
+                <input type="hidden" class="customer-review-rating-{{$key}}" value="{{ $customerReview->rating }}">
             </div>
 
         </div>
@@ -250,6 +258,103 @@
             @endfor
         </div>
         @endif
+        @if ($isGameBuyByUser)
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-customer-review">
+            Ajouter un avis
+        </button>
+        @else
+        <p>Vous devez achetez le jeu pour déposer votre avis</p>
+        @endif
+        <div class="modal fade" id="modal-customer-review" tabindex="-1" role="dialog"
+            aria-labelledby="modal-customer-review-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-customer-review-label">Ajouter un avis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{{ route('admin-customer-review.store') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="game_platforms_id" value="{{ $game->id}}">
+                            <div class="form-group">
+                                <label for="note">Note sur 5 :</label>
+                                <input type="number" min="1" max="5" class="form-control" name="rating" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="titre">Titre:</label>
+                                <input type="text" class="form-control" name="title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Description:</label>
+                                <textarea type="text" class="form-control" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Ajouter un avis</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-edit-customer-review" tabindex="-1" role="dialog"
+            aria-labelledby="modal-edit-customer-review-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-edit-customer-review-label">Modifier mon avis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form class="edit-form-customer-review" method="post">
+                        @method('PATCH')
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="game_platforms_id" value="{{ $game->id}}">
+                            <div class="form-group">
+                                <label for="note">Note sur 5 :</label>
+                                <input type="number" min="1" max="5" class="form-control edit-rating" name="rating" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="titre">Titre:</label>
+                                <input type="text" class="form-control edit-title" name="title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Description:</label>
+                                <textarea type="text" class="form-control edit-description"
+                                    name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Modifier mon avis</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script>
+$(document).ready(function() {
+    $('#modal-edit-customer-review').on('show.bs.modal', function(event) {
+        var modal = $(this);
+        var id = $(event.relatedTarget).data('id');
+        var customerReviewId = $(event.relatedTarget).data('customer-review-id');
+        modal.find('.edit-rating').val($('.customer-review-rating-' + id).val());
+        modal.find('.edit-title').val($('.customer-review-title-' + id).text());
+        modal.find('.edit-description').val($('.customer-review-description-' + id).text());
+        modal.find('.edit-form-customer-review').attr('action', '/admin/customer-review/'+customerReviewId);
+    });
+});
+</script>
 @endsection

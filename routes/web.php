@@ -34,13 +34,17 @@ Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail')->name('se
 Route::post('/search', 'PublicController@searchGame');
 
 Route::group(['middleware' => 'auth'], function () {
-    // Profile lambda user
+    // Profile user lambda
     Route::resource('/profile', 'ProfileController')->only([
         'index', 'update'
     ]);
 
     Route::resource('/order', 'OrderController')->only([
         'store'
+    ]);
+
+    Route::resource('customer-review', 'CustomerReviewController')->only([
+        'store', 'update'
     ]);
 
     Route::prefix('admin')->name('admin-')->middleware('admin')->group(function() {

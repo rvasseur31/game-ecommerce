@@ -62,4 +62,13 @@ class Game_buy_by_user extends Model {
         };
         return $gamesBougth;
     }
+
+    public static function isGameBougthByUser($user_id, $game_id) {
+        $gamesBougth = [];
+        foreach(Game_buy_by_user::where('user_id', $user_id)->get() as $game) {
+            $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
+            if ($game->id == $game_id) $gamesBougth[] = $game;     
+        };
+        return $gamesBougth;
+    }
 }

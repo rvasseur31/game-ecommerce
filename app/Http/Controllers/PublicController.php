@@ -51,6 +51,7 @@ class PublicController extends Controller {
             ->with('otherPlatforms', GamePlatform::getOtherPlatformFromGame($game_id))
             ->with('customerReviews', GamePlatform::find($game_id)->hasManyCustomerReview())
             ->with('customerReviewByMark', $this->getCustomerReviewByMark($game_id))
+            ->with('isGameBuyByUser', Game_buy_by_user::isGameBougthByUser(auth()->user()->id, $game_id))
             ->with('game', GamePlatform::game($game_id));
     }
 
