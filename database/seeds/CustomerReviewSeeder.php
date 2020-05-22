@@ -11,7 +11,7 @@ class CustomerReviewSeeder extends Seeder
      * @return void
      */
     public function run() {
-        factory(Customer_review::class, 4)->create()->each(function ($customerReview) {
+        factory(Customer_review::class, 10)->create()->each(function ($customerReview) {
             $customerReview->save();
         });
     }

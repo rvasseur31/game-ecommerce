@@ -10,7 +10,7 @@ class GameActivationKeySeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(Game_activation_key::class, 4)->create()->each(function ($gameActivationKey) {
+        factory(Game_activation_key::class, 100)->create()->each(function ($gameActivationKey) {
             $gameActivationKey->save();
         });
     }

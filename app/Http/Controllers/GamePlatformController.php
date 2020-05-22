@@ -64,7 +64,7 @@ class GamePlatformController extends Controller
             $game->fill($validatedData);
         }
         $request->session()->put('game', $game);
-        return redirect('/admin-game/create/two');
+        return redirect('/admin/game/create/two');
     }
 
     /**

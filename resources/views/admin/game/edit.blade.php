@@ -1,13 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-<style>
-#preview {
-    width: 200px;
-}
-</style>
-@endsection
-
 @section('content')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">

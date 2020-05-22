@@ -5,17 +5,10 @@
 @endsection
 
 @section('content')
-<style>
-body {
-    max-width: 100vw;
-    overflow: hidden;
-}
-</style>
-
 <div class="container">
     <div class="paginate row">
         @foreach($games as $key => $game)
-        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="{{ $key * 50 }}">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="{{ ($key%4+1) * 100 }}">
             <div class="card">
                 <img src="{{ asset('storage/thumbs/'.$game->filename) }}" class="img-responsive card-img-top"
                     alt="product image">

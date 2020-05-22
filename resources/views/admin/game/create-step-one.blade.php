@@ -1,25 +1,7 @@
 @extends('layouts.admin')
 
-@section('css')
-<style>
-input.transparent-input {
-    border: none !important
-}
-
-.transparent-input {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-}
-
-input.transparent-input {
-    background-color: rgba(0, 0, 0, 0) !important;
-    border: none !important;
-}
-</style>
-@endsection
-
 @section('content')
-<div>
+<div class="add-game-step-one">
     <h1 class="display-4 pt-5">Ajouter un jeu</h1>
     <table class="table">
         <thead>

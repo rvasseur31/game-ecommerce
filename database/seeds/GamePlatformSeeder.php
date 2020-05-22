@@ -11,7 +11,7 @@ class GamePlatformSeeder extends Seeder
      * @return void
      */
     public function run() {
-        factory(GamePlatform::class, 5)->create()->each(function ($game) {
+        factory(GamePlatform::class, 100)->create()->each(function ($game) {
             $game->save();
         });
     }

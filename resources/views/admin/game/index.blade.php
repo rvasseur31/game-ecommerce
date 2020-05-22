@@ -1,14 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<style>
-html,
-body {
-    max-width: 100vw;
-    overflow-x: hidden;
-}
-</style>
-
 <div class="col-sm-12">
     @if(session()->get('success'))
     <div class="alert alert-success">
