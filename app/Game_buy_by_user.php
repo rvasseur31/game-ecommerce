@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DateTime;
 use DateInterval;
+use Auth;
 
 
 class Game_buy_by_user extends Model {
@@ -63,12 +64,14 @@ class Game_buy_by_user extends Model {
         return $gamesBougth;
     }
 
-    public static function isGameBougthByUser($user_id, $game_id) {
+    public static function isGameBougthByUser($game_id) {
         $gamesBougth = [];
-        foreach(Game_buy_by_user::where('user_id', $user_id)->get() as $game) {
-            $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
-            if ($game->id == $game_id) $gamesBougth[] = $game;     
-        };
+        if (Auth::id()) {
+            foreach(Game_buy_by_user::where('user_id', Auth::id())->get() as $game) {
+                $game = Game_activation_key::getActivationKeyAndGame($game->game_activation_key_id);
+                if ($game->id == $game_id) $gamesBougth[] = $game;     
+            };
+        }
         return $gamesBougth;
     }
 }

@@ -33,7 +33,11 @@
 
             <form action="{{ route('addToCart', ['id' => $game->id]) }}" method="post">
                 @csrf
+                @if($isAvailable)
                 <button type="submit" class="btn btn-primary product-add-to-cart">Ajouter au panier</button>
+                @else
+                <button class="btn btn-primary product-add-to-cart" disabled>Indisponible</button>
+                @endif
             </form>
 
             <form action="{{ route('favorite') }}" method="post">
@@ -149,8 +153,8 @@
                     </div>
                     @if (Auth::id() == $customerReview->user_id)
                     <button type="button" class="btn btn-link edit-customer-review" data-toggle="modal"
-                        data-target="#modal-edit-customer-review" data-id="{{ $key }}"  data-customer-review-id="{{ $customerReview->id }}"><i
-                            class="fas fa-edit"></i></button>
+                        data-target="#modal-edit-customer-review" data-id="{{ $key }}"
+                        data-customer-review-id="{{ $customerReview->id }}"><i class="fas fa-edit"></i></button>
                     @endif
                 </div>
             </div>
@@ -186,6 +190,8 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-customer-review">
             Ajouter un avis
         </button>
+        @elseif (!Auth::id())
+        <p>Vous devez vous connecter pour déposer un avis</p>
         @else
         <p>Vous devez achetez le jeu pour déposer votre avis</p>
         @endif
@@ -277,7 +283,8 @@ $(document).ready(function() {
         modal.find('.edit-rating').val($('.customer-review-rating-' + id).val());
         modal.find('.edit-title').val($('.customer-review-title-' + id).text());
         modal.find('.edit-description').val($('.customer-review-description-' + id).text());
-        modal.find('.edit-form-customer-review').attr('action', '/admin/customer-review/'+customerReviewId);
+        modal.find('.edit-form-customer-review').attr('action', '/admin/customer-review/' +
+            customerReviewId);
     });
 });
 </script>

@@ -19,6 +19,8 @@ Route::get('/platform/{id}', 'PublicController@gamePerPlatform')->name('platform
 Route::get('/product/{id}', 'PublicController@product')->name('product');
 Route::post('/favorite', 'GameLikedByUserController@favorite')->name('favorite');
 
+Route::get('/search', 'PublicController@searchGame');
+
 // Route de connexion
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -30,8 +32,6 @@ Route::get('/shopping-bag', 'PublicController@shoppingBag');
 
 Route::get('/invoice/{user_id}/{order_id}', 'PublicController@userInvoice');
 Route::get('/mail/{user_id}/{order_id}', 'PublicController@sendEmail')->name('sendMail');
-
-Route::post('/search', 'PublicController@searchGame');
 
 Route::group(['middleware' => 'auth'], function () {
     // Profile user lambda

@@ -10,8 +10,8 @@ class GameBuyByUserSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        // factory(Game_buy_by_user::class, 1)->create()->each(function ($gameBuyByUser) {
-        //     $gameBuyByUser->save();
-        // });
+        factory(Game_buy_by_user::class, 1)->create()->each(function ($gameBuyByUser) {
+            $gameBuyByUser->save();
+        });
     }
 }

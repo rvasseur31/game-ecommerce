@@ -52,4 +52,12 @@ class GamePlatform extends Model {
         $game->view++;
         $game->save();
     }
+
+    public static function isAvailable($game_id) {
+        return sizeof(Game_activation_key::where('game_platforms_id', $game_id)->get());
+    }
+
+    public static function tenMostViewedGames() {
+        return self::allGames()->orderBy('view', 'desc')->take(10)->get();
+    }
 }

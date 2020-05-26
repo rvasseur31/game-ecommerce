@@ -109,7 +109,7 @@
                     </div>
                 </div>
 
-                <form class="form-inline my-2 my-lg-0" method="POST" action="{{url('/search') }}">
+                <form class="form-inline my-2 my-lg-0" method="GET" action="{{url('/search') }}">
                     @csrf
                     <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
                         aria-label="Search">

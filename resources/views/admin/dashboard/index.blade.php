@@ -3,47 +3,35 @@
 @section('content')
 <div class="container-info">
     <h1>Informations principales</h1>
-    <div class="row">
-        <div class="col-lg-3 mb-4">
-            <div class="card bg-dark text-white shadow" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Membres :</h2>
-                    <p class="card-text text-center">{{ $totalUsers }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card bg-dark text-white shadow" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Nombre de ventes :</h2>
-                    <p class="card-text text-center">{{ $totalGamesBuy }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card bg-dark text-white shadow" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Revenu total :</h2>
-                    <p class="card-text text-center">{{ $totalIncome }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card bg-dark text-white shadow" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Revenu sur les 7 derniers jours :</h2>
-                    <p class="card-text text-center">{{ $lastSevenDaysIncome }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card bg-dark text-white shadow" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Nombre de jeu acheté sur les 7 derniers jours :</h2>
-                    <p class="card-text text-center">{{ $lastSevenDaysGamesBuy }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Information</th>
+                <th scope="col">Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Membres :</th>
+                <td>{{ $totalUsers }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nombre de ventes :</th>
+                <td>{{ $totalGamesBuy }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nombre de jeu acheté sur les 7 derniers jours :</th>
+                <td>{{ $lastSevenDaysGamesBuy }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Revenu total :</th>
+                <td>{{ $totalIncome }} €</td>
+            </tr>
+            <tr>
+                <th scope="row">Revenu sur les 7 derniers jours :</th>
+                <td>{{ $lastSevenDaysIncome }} €</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 @endsection
